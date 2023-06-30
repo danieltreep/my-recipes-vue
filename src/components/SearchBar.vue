@@ -17,13 +17,14 @@ const handleClear = () => {
 
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
     .search {
         background-color: var(--card-color);
         border-radius: var(--border-radius-m);
         display: flex;
         justify-content: space-between;
         padding: .3rem .5rem;
+        margin: 1rem 0 2rem;
     }
     .search input {
         width: 100%;

@@ -33,7 +33,6 @@ const imageUrl = ref<string>(new URL(`/src/assets/vectors/${props.cat}.svg`, imp
     }
     .card p {
         color: var(--font-color);
-        font-family: 'Roboto';
         font-weight: 500;
     }
 </style>
