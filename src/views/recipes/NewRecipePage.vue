@@ -1,54 +1,57 @@
 <template>
     <div class="page">
         <header>
-            <span class="material-symbols-outlined">arrow_back</span>
-            <h2>Nieuw recept</h2>
+            <h3>Nieuw recept</h3>
+            <StepIndicators :step="step"/>
         </header>
         <StepForm />
-        <form>
-            <fieldset>
-                <p>Informatie</p>
-                <div class="inputGroup">
-                    <div class="field">
-                        <span class="material-symbols-outlined">person</span>
-                        <label for="people">Aantal personen:</label>
-                    </div>
-                    <input type="number" id="people" >
-                </div>
-            </fieldset>
-        </form>
+        <div class="buttons">
+            <button :disabled="step === 1" @click.prevent="step--">
+                <span class="material-symbols-outlined">navigate_before</span>
+            Vorige</button>
+            <button v-if="step < 3" @click.prevent="step++" class="next">
+                Volgende
+                <span class="material-symbols-outlined">navigate_next</span>
+            </button>
+            <button v-if="step === 3" class="save">Opslaan</button>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import StepForm from '@/components/StepForm.vue';
+import StepForm from '@/components/stepForm/StepForm.vue';
+import StepIndicators from '@/components/stepForm/StepIndicators.vue';
+import { ref } from 'vue';
 
+const step = ref<number>(1)
 
 </script>
 
 <style lang="css" scoped>
-    .inputGroup {
-        background-color: var(--card-color);
-        box-shadow: var(--box-shadow);
-        border-radius: var(--border-radius-m);
+    h3 {
+        text-align: center;
+        margin: 1rem 0 3rem;
+    }
+    .buttons {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        padding: .5rem;
+        margin-top: 2rem;
     }
-    .field {
+    button {
+        padding: .6rem .8rem;
+        border-radius: var(--border-radius-m);
+        border: none;
         display: flex;
-        gap: .5rem;
         align-items: center;
+        gap: .5rem;
+        font-weight: 500;
+        background-color: var(--background-color);
     }
-    fieldset {
-        padding: 0;
-        border: none;
+    button .material-symbols-outlined {
+        font-size: 16px;
     }
-    input {
-        outline: transparent;
-        border: none;
-        border-bottom: 1px solid var(--font-inactive);
-        text-align: end;
+    .next, .save {
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color)
     }
 </style>

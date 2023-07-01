@@ -1,41 +1,56 @@
 <template>
     <div class="steps">
-        <div class="step">
+        <div class="step" :class="step === 1 ? 'active' : ''">
             <div class="circle">
                 <span class="material-symbols-outlined">info</span>
             </div>
             <p>Details</p>
         </div>
-        <div class="step">
+        <div class="step" :class="step === 2 ? 'active' : ''">
             <div class="circle">
                 <span class="material-symbols-outlined">bakery_dining</span>
             </div>
             <p>Ingredienten</p>
         </div>
-        <div class="step">
+        <div class="step" :class="step === 3 ? 'active' : ''">
             <div class="circle">
                 <span class="material-symbols-outlined">format_list_bulleted</span>
             </div>
             <p>Stappen</p>
         </div>
         <div class="bar">
-            <div class="progress"></div>
+            <div class="progress" ref="progress" @click="handleref"></div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-// Steps based on props, url??
+import { ref } from 'vue';
+
+const props = defineProps<{
+    step: number
+}>()
+
+const handleref = () => {
+    console.log(progress.value)
+}
+
+const progress = ref(null)
+
+const handleProgress = () => {
+
+}
 </script>
 
 <style lang="css" scoped>
+    
 .steps {
     display: flex;
     position: relative;
     justify-content: center;
     width: fit-content;
     margin: 0 auto;
-    gap: 1.5rem;
+    gap: 2.5rem;
 }
 .step {
     display: flex;
@@ -43,27 +58,40 @@
     align-items: center;
     z-index: 1;
     gap: .5rem;
+    color: var(--font-inactive);
     font-size: 12px;
 }
 .circle {
-    border: 1px solid var(--primary-color);
-    padding: .5rem;
+    border: 1px solid var(--font-inactive);
+    padding: .3rem;
     border-radius: 50%;
     display: flex;
     background-color: var(--background-color);
-    color: var(--primary-color);
 }
 .bar {
-    height: 5px;
+    height: 3px;
     width: 90%;
     background-color: lightgrey;
     border-radius: 8px;
     position: absolute;
-    top: 30%;
+    top: 13px;
 }
 .progress {
-    height: 5px;
-    width: 50px;
+    height: 3px;
+    width: 30px;
     background-color: var(--primary-color);
+}
+.material-symbols-outlined {
+    font-size: 16px;
+}
+.active {
+    color: var(--font-color);
+    font-weight: 500;
+    transition: .3s;
+}
+.active .circle {
+    border-color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: white;
 }
 </style>
