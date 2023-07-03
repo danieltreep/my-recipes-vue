@@ -64,5 +64,6 @@ import RecipeList from '@/components/recipes/RecipeList.vue'
     img {
         height: 300px;
         object-fit: cover;
+        filter: brightness(80%);
     }
 </style>
