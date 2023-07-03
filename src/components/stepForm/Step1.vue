@@ -61,7 +61,7 @@
 
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
     .inputGroup, textarea {
         background-color: var(--card-color);
         box-shadow: var(--box-shadow);
@@ -72,33 +72,26 @@
         padding: .5rem;
         width: 100%;
         border: none;
+        gap: .5rem;
     }
     .field {
         display: flex;
         gap: .5rem;
         align-items: center;
     }
-    fieldset {
-        padding: 0;
-        border: none;
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        margin: 2rem 0;
-    }
+    
     input {
         outline: transparent;
         border: none;
-        border-bottom: 1px solid var(--font-inactive);
+        border-bottom: 1px solid var(--background-color);
         text-align: end;
+        width: 100%;
     }
     #fileInput {
         display: none;
     }
-    legend {
-        margin: 0 0 .5rem .5rem;
-        font-size: 14px;
-        font-weight: 500;
+    label {
+        width: max-content;
     }
     select {
         border: none;

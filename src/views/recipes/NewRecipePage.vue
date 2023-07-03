@@ -4,7 +4,7 @@
             <h3>Nieuw recept</h3>
             <StepIndicators :step="step"/>
         </header>
-        <StepForm />
+        <StepForm :step="step"/>
         <div class="buttons">
             <button :disabled="step === 1" @click.prevent="step--">
                 <span class="material-symbols-outlined">navigate_before</span>
@@ -35,7 +35,7 @@ const step = ref<number>(1)
     .buttons {
         display: flex;
         justify-content: space-between;
-        margin-top: 2rem;
+        margin: 2rem 0 calc(85px + 2rem);
     }
     button {
         padding: .6rem .8rem;

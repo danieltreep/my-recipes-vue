@@ -59,6 +59,7 @@ const handleProgress = () => {
     z-index: 1;
     gap: .5rem;
     color: var(--font-inactive);
+    font-weight: 500;
     font-size: 12px;
 }
 .circle {
@@ -86,7 +87,6 @@ const handleProgress = () => {
 }
 .active {
     color: var(--font-color);
-    font-weight: 500;
     transition: .3s;
 }
 .active .circle {
