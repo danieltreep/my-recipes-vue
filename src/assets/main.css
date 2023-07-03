@@ -37,3 +37,12 @@ img {
 h1 {
   font-family: serif;
 }
+.box {
+  background-color: var(--card-color);
+  border-radius: var(--border-radius-m);
+  box-shadow: var(--box-shadow); 
+  padding: .7rem;
+}
+ul {
+  padding: 0;
+}

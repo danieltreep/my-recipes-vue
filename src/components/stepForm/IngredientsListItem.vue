@@ -15,7 +15,7 @@
 
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
     li {
         display: flex;
         justify-content: space-between;

@@ -2,7 +2,7 @@
     <div class="addStep">        
         <textarea placeholder="Stap" class="box"></textarea>
         
-        <button class="box add">Voeg stap toe</button>
+        <button class="box">Voeg stap toe</button>
     </div>
 </template>
 
@@ -22,11 +22,10 @@
         padding: .7rem;
         border-radius: var(--border-radius-m);
         box-shadow: var(--box-shadow);
-        border: none;
-        display: flex;
     }
     textarea {
         width: 100%;
+        border: none;
     }
     button {
         width: fit-content;

@@ -20,13 +20,11 @@
                     </div>
                 </div>
             </div>
-            <RecipeList />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import RecipeList from '@/components/recipes/RecipeList.vue'
 
 </script>
 

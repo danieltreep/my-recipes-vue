@@ -24,7 +24,7 @@
 
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
     .addIngredient {
         display: grid;
         grid-template-columns: 5fr 4fr 1fr;

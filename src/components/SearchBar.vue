@@ -1,7 +1,7 @@
 <template>
     <form class="search">
         <span class="material-symbols-outlined">search</span>
-        <input type="text" v-model="searchTerm">
+        <input type="text" v-model="searchTerm" placeholder="Zoek een recept">
         <span class="material-symbols-outlined" v-if="searchTerm" @click="handleClear">cancel</span>
     </form>
 </template>

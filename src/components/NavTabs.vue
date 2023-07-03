@@ -1,6 +1,6 @@
 <template>
     <nav>
-        <router-link to="/recipes" >
+        <router-link :to="{name: 'Recipes'}" >
             <div class="link">
                 <span class="material-symbols-outlined">menu_book</span>
                 <p>Recepten</p>
