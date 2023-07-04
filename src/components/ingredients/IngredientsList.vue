@@ -1,11 +1,16 @@
 <template>
-    <ul>
-        <IngredientsListItem />
+    <ul >
+        <IngredientsListItem v-for="(ingredient, index) in ingredients" :key="index" :index="index" :ingredient="ingredient"/>
     </ul>
 </template>
 
 <script setup lang="ts">
+import type { Ingredient } from '@/types/Ingredient';
 import IngredientsListItem from './IngredientsListItem.vue';
+
+defineProps<{
+    ingredients: Array<Ingredient>
+}>()
 
 </script>
 

@@ -1,13 +1,23 @@
 <template>
-    <div class="addStep">        
-        <textarea placeholder="Stap" class="box"></textarea>
+    <div class="addStep">    
+        <textarea placeholder="Beschrijf de stap hier ..." class="box" v-model="step"></textarea>
         
-        <button class="box">Voeg stap toe</button>
+        <button class="box" @click.prevent="handleAddStep">Voeg stap toe</button>
     </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
+import { useNewRecipeStore } from '@/stores/newRecipe';
 
+const { addStep } = useNewRecipeStore()
+
+const step = ref('')
+
+const handleAddStep = () => {
+    addStep(step.value)
+    step.value = ''
+}
 </script>
 
 <style lang="css" scoped>
@@ -15,7 +25,7 @@
         display: flex;
         flex-direction: column;
         gap: .5rem;
-        margin-top: .5rem;
+        margin-top: 2rem;
     }
     .box {
         background-color: var(--card-color);

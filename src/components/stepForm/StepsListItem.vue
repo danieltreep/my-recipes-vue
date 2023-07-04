@@ -1,17 +1,20 @@
 <template>
     <li class="step">
         <div class="info">
-            <p  class="number">1.</p>
+            <p  class="number">{{ index + 1 }}.</p>
             <!-- <span class="material-symbols-outlined">edit</span> -->
         </div>
         <div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi iusto rem quae praesentium explicabo corrupti culpa velit, similique, aliquid provident, excepturi laboriosam harum inventore exercitationem dolores. Saepe dicta consequuntur illum.</p>
+            <p>{{ step }}</p>
         </div>
     </li>
 </template>
 
 <script setup lang="ts">
-
+defineProps<{
+    step: string,
+    index: number
+}>()
 </script>
 
 <style lang="css" scoped>
@@ -25,6 +28,9 @@
     .step .material-symbols-outlined {
         font-size: 16px;
         color: var(--font-inactive);
+    }
+    .step:not(:first-of-type) {
+        margin-top: 5px;
     }
     .number {
         font-size: 32px;

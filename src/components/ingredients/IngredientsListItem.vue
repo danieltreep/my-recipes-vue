@@ -1,18 +1,30 @@
 <template>
     <li class="inputGroup">
         <div class="ingredient">
-            <span class="material-symbols-outlined">delete</span>
-            <p>Tomaten</p>    
+            <span class="material-symbols-outlined" @click.prevent="handleDelete(index)">delete</span>
+            <p>{{ ingredient?.name }}</p>    
         </div>
         <div class="hoeveelheid">
-            <p>100</p>
-            <p>g</p>
+            <p>{{ ingredient?.amount }}</p>
+            <p>{{ ingredient?.unit }}</p>
         </div>
     </li>
 </template>
 
 <script setup lang="ts">
+import type { Ingredient } from '@/types/Ingredient';
+import { useNewRecipeStore } from '@/stores/newRecipe';
 
+const {deleteIngredient} = useNewRecipeStore()
+
+defineProps<{
+    ingredient: Ingredient,
+    index: number
+}>()
+
+const handleDelete = (index: number) => {
+    deleteIngredient(index)
+} 
 </script>
 
 <style lang="css" scoped>

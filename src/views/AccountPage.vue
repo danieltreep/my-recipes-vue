@@ -7,7 +7,7 @@
         </header>
         <div class="profile">
             <span class="material-symbols-outlined">account_circle</span>
-            <p class="displayName">DisplayName</p>
+            <p class="displayName">{{user?.displayName}}</p>
             <p class="title">Hobby Cook</p>
         </div>
         <div class="preferences">
@@ -33,9 +33,11 @@
 <script setup lang="ts">
 import useSignOut from '@/composables/auth/useSignOut';
 import { useRouter } from 'vue-router';
+import getUser from "@/composables/auth/getUser";
 
 const router = useRouter()
 const { signout, error } = useSignOut()
+const { user } = getUser()
 
 const handleSignOut = async () => {
     await signout()

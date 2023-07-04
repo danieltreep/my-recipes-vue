@@ -4,24 +4,31 @@
             <legend>Informatie</legend>
             <div class="inputGroup">
                 <div class="field">
+                    <span class="material-symbols-outlined">title</span>
+                    <label for="people">Titel:</label>
+                </div>
+                <input type="text" id="people" v-model="newRecipe.title" placeholder="Titel">
+            </div>
+            <div class="inputGroup">
+                <div class="field">
                     <span class="material-symbols-outlined">person</span>
                     <label for="people">Aantal personen:</label>
                 </div>
-                <input type="number" id="people" >
+                <input type="number" id="people" v-model="newRecipe.people">
             </div>
             <div class="inputGroup">
                 <div class="field">
                     <span class="material-symbols-outlined">schedule</span>
                     <label for="people">Aantal minuten:</label>
                 </div>
-                <input type="number" id="people" >
+                <input type="number" id="people" v-model="newRecipe.time">
             </div>
             <div class="inputGroup">
                 <div class="field">
                     <span class="material-symbols-outlined">room_service</span>
                     <label for="people">Categorie</label>
                 </div>
-                <select>
+                <select v-model="newRecipe.category">
                     <option disabled selected>Selecteer</option>
                     <option value="ontbijt">Ontbijt</option>
                     <option value="lunch">Lunch</option>
@@ -36,7 +43,7 @@
         </fieldset>
         <fieldset>
             <legend>Beschrijving (optioneel)</legend>
-            <textarea placeholder="Beschrijving" rows="4"></textarea>
+            <textarea placeholder="Beschrijving" rows="4" v-model="newRecipe.description"></textarea>
         </fieldset>
         <fieldset>
             <legend>Tags</legend>
@@ -58,6 +65,10 @@
 </template>
 
 <script setup lang="ts">
+import { useNewRecipeStore } from '@/stores/newRecipe';
+import { storeToRefs } from 'pinia';
+
+const {newRecipe} = storeToRefs(useNewRecipeStore())
 
 </script>
 

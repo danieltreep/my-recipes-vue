@@ -2,26 +2,31 @@
     <div>
         <div class="addIngredient">
             <div class="box">
-                <input type="text" placeholder="Ingredient">
+                <input type="text" placeholder="Ingredient" v-model="currentIngredient.name">
             </div>
             <div class="box">
-                <input type="number" placeholder="40" class="hoeveelheid" >
-                <select>
+                <input type="number" placeholder="40" class="hoeveelheid" v-model="currentIngredient.amount">
+                <select v-model="currentIngredient.unit">
+                    <option value="aantal" selected disabled>Aantal</option>
                     <option value="mg">mg</option>
                     <option value="g">g</option>
                     <option value="kg">kg</option>
                     <option value="ml">ml</option>
                     <option value="l">l</option>
-                    <option value="stuks">stuks</option>
+                    <option value="x">x</option>
                 </select>
             </div>
-            <button class="box add">+</button>
+            <button class="box add" @click.prevent="addIngredient">+</button>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import { useNewRecipeStore } from '@/stores/newRecipe';
+import { storeToRefs } from 'pinia';
 
+const {currentIngredient} = storeToRefs(useNewRecipeStore())
+const {addIngredient} = useNewRecipeStore()
 </script>
 
 <style lang="css" scoped>

@@ -2,7 +2,12 @@
     <fieldset>
         <legend>Stappen</legend>
         <ul>
-            <StepsListItem />
+            <StepsListItem 
+                v-for="(step, index) in newRecipe.steps" 
+                :key="index" 
+                :step="step"
+                :index="index"
+            />
         </ul>
         <AddSteps />
     </fieldset>
@@ -11,8 +16,10 @@
 <script setup lang="ts">
 import StepsListItem from './StepsListItem.vue';
 import AddSteps from './AddSteps.vue';
+import { useNewRecipeStore } from '@/stores/newRecipe';
+import { storeToRefs } from 'pinia';
 
-
+const { newRecipe } = storeToRefs(useNewRecipeStore())
 </script>
 
 <style lang="css" scoped>

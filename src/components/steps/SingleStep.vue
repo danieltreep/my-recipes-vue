@@ -1,17 +1,20 @@
 <template>
-    <li class="step box">
+    <li class="step">
         <div class="info">
-            <p  class="number">1.</p>
+            <p  class="number">{{ index + 1 }}.</p>
             <!-- <span class="material-symbols-outlined">edit</span> -->
         </div>
         <div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi iusto rem quae praesentium explicabo corrupti culpa velit, similique, aliquid provident, excepturi laboriosam harum inventore exercitationem dolores. Saepe dicta consequuntur illum.</p>
+            <p>{{ step }}</p>
         </div>
     </li>
 </template>
 
 <script setup lang="ts">
-
+defineProps<{
+    step: string,
+    index: number
+}>()
 </script>
 
 <style lang="css" scoped>
@@ -19,7 +22,7 @@
         display: grid;
         grid-template-columns: 1fr 7fr;
         align-items: start;
-        padding: 1.2rem;
+        padding: 1rem;
         color: var(--font-color);
     }
     .step .material-symbols-outlined {

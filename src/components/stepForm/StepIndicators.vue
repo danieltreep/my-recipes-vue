@@ -19,27 +19,18 @@
             <p>Stappen</p>
         </div>
         <div class="bar">
-            <div class="progress" ref="progress" @click="handleref"></div>
+            <div class="progress" ref="progress" ></div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useStepStore } from '@/stores/step';
+import { storeToRefs } from 'pinia';
 
-const props = defineProps<{
-    step: number
-}>()
+const { step } = storeToRefs(useStepStore())
 
-const handleref = () => {
-    console.log(progress.value)
-}
-
-const progress = ref(null)
-
-const handleProgress = () => {
-
-}
 </script>
 
 <style lang="css" scoped>
