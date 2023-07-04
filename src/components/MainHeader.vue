@@ -2,7 +2,7 @@
     <header>
         <div class="flex">
             <img src="@/assets/logo.svg">
-            <p>Hi Daniël</p>
+            <p>Hi {{currentUser?.displayName}}</p>
         </div>
         <SearchBar />
         <h1>Kies je categorie</h1>
@@ -11,7 +11,9 @@
 
 <script setup lang="ts">
 import SearchBar from './SearchBar.vue';
+import { useCurrentUserStore } from '@/stores/currentUser';
 
+const {currentUser} = useCurrentUserStore()
 
 </script>
 

@@ -25,7 +25,6 @@ const handleAddStep = () => {
         display: flex;
         flex-direction: column;
         gap: .5rem;
-        margin-top: 2rem;
     }
     .box {
         background-color: var(--card-color);
