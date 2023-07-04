@@ -3,7 +3,7 @@
         <img src="@/assets/food.jpg" alt="">
         <div class="page">
             <header>
-                <span class="material-symbols-outlined">keyboard_backspace</span>
+                <span class="material-symbols-outlined" @click="router.go(-1)">keyboard_backspace</span>
                 <span class="material-symbols-outlined fav">favorite_border</span>
                 <span class="material-symbols-outlined">more_vert</span>
             </header>
@@ -58,12 +58,15 @@
 import IngredientsList from '@/components/ingredients/IngredientsList.vue'
 import SingleStep from '@/components/steps/SingleStep.vue'
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 defineProps<{
     category: string
 }>()
 
 const tab = ref<string>('i')
+
+const router = useRouter()
 
 </script>
 

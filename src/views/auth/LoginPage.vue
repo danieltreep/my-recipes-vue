@@ -2,13 +2,13 @@
     <div class="startPage">
         <div class="container">
             <img src="@/assets/logo.svg" alt="">
-            <form>
+            <form @submit.prevent="handleSubmit">
                 <div class="inputField">
-                    <input type="text" placeholder="Gebruikersnaam">
-                    <span class="material-symbols-outlined">account_circle</span>
+                    <input type="text" placeholder="Email" v-model="email">
+                    <span class="material-symbols-outlined">email</span>
                 </div>
                 <div class="inputField" >
-                    <input type="password" placeholder="Wachtwoord">
+                    <input type="password" placeholder="Wachtwoord" v-model="password">
                     <span class="material-symbols-outlined">lock</span>
                 </div>
                 <p class="vergeten">Wachtwoord vergeten?</p>
@@ -23,6 +23,22 @@
 </template>
 
 <script setup lang="ts">
+import useLogin from '@/composables/auth/useLogin';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const { login, error, isPending } = useLogin()
+const email = ref<string>('')
+const password = ref<string>('')
+const router = useRouter()
+
+const handleSubmit = async () => {
+    await login(email.value, password.value)
+
+    if (!error.value) {
+        router.push({name: 'Recipes'})
+    } 
+}
 
 </script>
 
@@ -36,6 +52,7 @@
         background-blend-mode: darken;
         display: flex;
         flex-direction: column;
+        justify-content: space-around;
     }
     .container {
         /* max-width: 280px; */
@@ -43,6 +60,7 @@
         text-align: center;
         padding: 3rem;
         color: var(--font-light);
+        /* margin-bottom: 5rem; */
     }
     .inputField {
         background-color: #ffffff15;
@@ -58,12 +76,14 @@
     }
     img {
         width: 160px;
+        margin-bottom: 2rem;
     }
     input {
         border: none;
         width: 100%;
         background-color: transparent;
         outline: transparent;
+        color: var(--font-light);
     }
     .vergeten {
         text-align: left;

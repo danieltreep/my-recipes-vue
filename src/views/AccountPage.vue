@@ -1,7 +1,7 @@
 <template>
     <div class="page">
         <header>
-            <span class="material-symbols-outlined">arrow_back</span>
+            <span class="material-symbols-outlined">keyboard_backspace</span>
             <h3>Mijn Account</h3>
             <span class="material-symbols-outlined">more_vert</span>
         </header>
@@ -23,7 +23,7 @@
                 </li>
             </ul>
         </div>
-        <div class="box logout">
+        <div class="box logout" @click="handleSignOut">
             <p>Logout</p>
             <span class="material-symbols-outlined">logout</span>
         </div>
@@ -31,7 +31,19 @@
 </template>
 
 <script setup lang="ts">
+import useSignOut from '@/composables/auth/useSignOut';
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
+const { signout, error } = useSignOut()
+
+const handleSignOut = async () => {
+    await signout()
+
+    if (!error.value) {
+        router.push({name: 'Login'})
+    }
+}
 </script>
 
 <style lang="css" scoped>

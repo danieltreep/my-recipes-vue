@@ -3,7 +3,7 @@
         <img src="@/assets/food.jpg" alt="">
         <div class="page">
             <header>
-                <span class="material-symbols-outlined">keyboard_backspace</span>
+                <span class="material-symbols-outlined" @click="router.go(-1)">keyboard_backspace</span>
                 <div class="hero">
                     <span class="material-symbols-outlined">room_service</span>
                     <h1>Hoofdgerechten</h1>
@@ -27,6 +27,9 @@
 
 <script setup lang="ts">
 import RecipeList from '@/components/recipes/RecipeList.vue'
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
 
 </script>
 

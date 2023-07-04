@@ -2,17 +2,17 @@
     <div class="startPage">
         <div class="container">
             <img src="@/assets/logo.svg" alt="">
-            <form>
+            <form @submit.prevent="handleSubmit">
                 <div class="inputField">
-                    <input type="text" placeholder="Gebruikersnaam">
+                    <input type="text" placeholder="Gebruikersnaam" v-model="displayName">
                     <span class="material-symbols-outlined">account_circle</span>
                 </div>
                 <div class="inputField">
-                    <input type="text" placeholder="Emailadres">
+                    <input type="text" placeholder="Emailadres" v-model="email">
                     <span class="material-symbols-outlined">email</span>
                 </div>
                 <div class="inputField" >
-                    <input type="password" placeholder="Wachtwoord">
+                    <input type="password" placeholder="Wachtwoord" v-model="password">
                     <span class="material-symbols-outlined">lock</span>
                 </div>
                 <p class="vergeten">Wachtwoord vergeten?</p>
@@ -27,7 +27,24 @@
 </template>
 
 <script setup lang="ts">
+import useSignup from '@/composables/auth/useSignup'
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
+const { signup, error, isPending } = useSignup()
+const router = useRouter()
+
+const displayName = ref<string>('')
+const email = ref<string>('')
+const password = ref<string>('')
+
+const handleSubmit = async () => {
+    await signup(email.value, password.value, displayName.value)
+
+    if (!error.value) {
+        router.push({name: 'Recipes'})
+    }
+}
 </script>
 
 <style lang="css" scoped>
@@ -40,6 +57,7 @@
         background-blend-mode: darken;
         display: flex;
         flex-direction: column;
+        justify-content: space-around;
     }
     .container {
         /* max-width: 280px; */
@@ -56,18 +74,21 @@
         margin-top: 10px;
         padding: .5rem;
         box-shadow: var(--box-shadow);
+        
     }
     ::placeholder {
         color: var(--font-light);
     }
     img {
         width: 160px;
+        margin-bottom: 2rem;
     }
     input {
         border: none;
         width: 100%;
         background-color: transparent;
         outline: transparent;
+        color: var(--font-light);
     }
     .vergeten {
         text-align: left;

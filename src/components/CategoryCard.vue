@@ -35,4 +35,7 @@ const imageUrl = ref<string>(new URL(`/src/assets/vectors/${props.cat}.svg`, imp
         color: var(--font-color);
         font-weight: 500;
     }
+    img {
+        height: 100%;
+    }
 </style>

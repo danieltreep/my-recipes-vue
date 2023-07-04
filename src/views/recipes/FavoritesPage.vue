@@ -3,11 +3,10 @@
         <img src="@/assets/food.jpg" alt="">
         <div class="page">
             <header>
-                <span class="material-symbols-outlined">keyboard_backspace</span>
-                <div class="hero">
+                
                     <span class="material-symbols-outlined">favorite</span>
                     <h1>Favorieten</h1>
-                </div>
+                
             </header>
             <div class="tagsSection">
                 <div class="tagsHeader">
@@ -37,10 +36,11 @@ import RecipeList from '@/components/recipes/RecipeList.vue'
         backdrop-filter: blur(10px);
         transform: translateY(-100px);
     }
-    .hero {
+    header {
         text-align: center;
+        padding-top: 2rem;
     }
-    .hero span {
+    header span {
         color: var(--primary-color);
         font-size: 30px;
     }
