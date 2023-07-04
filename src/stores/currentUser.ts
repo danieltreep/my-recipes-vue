@@ -2,10 +2,15 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import getUser from '@/composables/auth/getUser';
 
-const { user } = getUser()
-
 export const useCurrentUserStore = defineStore('currentUser', () => {
-  const currentUser = ref(user)
+  
+  const { user } = getUser()
 
-  return { currentUser }
+  const currentUser = ref<object>(user)
+  
+  const resetCurrentUser = () => {
+    currentUser.value = {}
+  }
+
+  return { currentUser, resetCurrentUser }
 })

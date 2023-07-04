@@ -35,6 +35,7 @@ const handleAddStep = () => {
     textarea {
         width: 100%;
         border: none;
+        outline: transparent;
     }
     button {
         width: fit-content;

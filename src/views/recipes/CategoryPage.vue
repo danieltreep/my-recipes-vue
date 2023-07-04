@@ -6,7 +6,7 @@
                 <span class="material-symbols-outlined" @click="router.go(-1)">keyboard_backspace</span>
                 <div class="hero">
                     <span class="material-symbols-outlined">room_service</span>
-                    <h1>Hoofdgerechten</h1>
+                    <h1>{{category}}</h1>
                 </div>
             </header>
             <div class="tagsSection">
@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <RecipeList />
+            <RecipeList :recipes="documents"/>
         </div>
     </div>
 </template>
@@ -28,6 +28,16 @@
 <script setup lang="ts">
 import RecipeList from '@/components/recipes/RecipeList.vue'
 import { useRouter } from 'vue-router';
+import getCollection from '@/composables/recipes/getCollection'
+
+const props = defineProps<{
+    category: {
+        type: string,
+        required: true
+    }
+}>()
+
+const { documents, error } = getCollection('recipes', props.category)
 
 const router = useRouter()
 

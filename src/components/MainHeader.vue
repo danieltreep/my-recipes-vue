@@ -2,7 +2,7 @@
     <header>
         <div class="flex">
             <img src="@/assets/logo.svg">
-            <p>Hi {{currentUser?.displayName}}</p>
+            <p>Hi {{currentUser.displayName}}</p>
         </div>
         <SearchBar />
         <h1>Kies je categorie</h1>

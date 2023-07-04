@@ -49,11 +49,13 @@ const {addIngredient} = useNewRecipeStore()
         border: none;
         border-bottom: 1px solid var(--background-color);
         width: 100%;
+        outline: transparent;
     }
     select {
         border: none;
         padding-right: .5rem;
         text-align: end;
+        outline: transparent;
     }
     .add {
         border: 1px solid var(--secondary-color);

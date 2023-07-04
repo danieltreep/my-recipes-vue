@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useCurrentUserStore } from '@/stores/currentUser'
+
 import RecipesPage from '../views/recipes/RecipesPage.vue'
 import RecipePage from '../views/recipes/RecipePage.vue'
 import LoginPage from '../views/auth/LoginPage.vue'
@@ -7,6 +9,18 @@ import NewRecipePage from '../views/recipes/NewRecipePage.vue'
 import FavoritesPage from '../views/recipes/FavoritesPage.vue'
 import AccountPage from '../views/AccountPage.vue'
 import CategoryPage from '../views/recipes/CategoryPage.vue'
+
+// Route guard
+import { auth } from '@/firebase/config'
+
+const requireAuth = (to: any, from: any, next: Function) => {
+  let user = auth.currentUser
+  if(!user) {
+    next({name: 'Login'})
+  } else {
+    next()
+  }
+}
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,17 +33,20 @@ const router = createRouter({
       path: '/recipes',
       name: 'Recipes',
       component: RecipesPage,
+      beforeEnter: requireAuth
     },
     {
       path: '/recipes/:category',
       name: 'Category',
       component: CategoryPage,
+      beforeEnter: requireAuth,
       props: true
     },
     {
       path: '/recipes/:category/:id',
       name: 'Recipe',
       component: RecipePage,
+      beforeEnter: requireAuth,
       props: true
     },
     {
@@ -45,17 +62,20 @@ const router = createRouter({
     {
       path: '/new',
       name: 'NewRecipe',
-      component: NewRecipePage
+      component: NewRecipePage,
+      beforeEnter: requireAuth
     },
     {
       path: '/favorites',
       name: 'Favorites',
-      component: FavoritesPage
+      component: FavoritesPage,
+      beforeEnter: requireAuth
     },
     {
       path: '/account',
       name: 'Account',
-      component: AccountPage
+      component: AccountPage,
+      beforeEnter: requireAuth
     },
   ]
 })

@@ -38,13 +38,14 @@ import { useCurrentUserStore } from '@/stores/currentUser';
 
 const router = useRouter()
 
-const {currentUser} = useCurrentUserStore()
+const {currentUser, resetCurrentUser} = useCurrentUserStore()
 const { signout, error } = useSignOut()
 
 const handleSignOut = async () => {
     await signout()
 
     if (!error.value) {
+        resetCurrentUser()
         router.push({name: 'Login'})
     }
 }

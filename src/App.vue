@@ -8,7 +8,6 @@ const {user} = getUser()
 </script>
 
 <template>
-
   <RouterView />
   <NavTabs v-if="user"/>
 </template>

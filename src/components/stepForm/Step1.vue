@@ -7,7 +7,7 @@
                     <span class="material-symbols-outlined">title</span>
                     <label for="people">Titel:</label>
                 </div>
-                <input type="text" id="people" v-model="newRecipe.title" placeholder="Titel">
+                <input type="text" id="people" v-model="newRecipe.title" >
             </div>
             <div class="inputGroup">
                 <div class="field">
@@ -34,7 +34,7 @@
                     <option value="lunch">Lunch</option>
                     <option value="hoofdgerecht" >Hoofdgerecht</option>
                     <option value="voorgerecht">Voorgerecht</option>
-                    <option value="dessert">Dessert</option>
+                    <option value="desserts">Desserts</option>
                     <option value="bijgerecht">Bijgerecht</option>
                     <option value="tussendoor">Tussendoor</option>
                     <option value="drinken">Drinken</option>
@@ -84,13 +84,16 @@ const {newRecipe} = storeToRefs(useNewRecipeStore())
         width: 100%;
         border: none;
         gap: .5rem;
+        outline: transparent;
     }
     .field {
         display: flex;
         gap: .5rem;
         align-items: center;
     }
-    
+    .material-symbols-outlined {
+        color: var(--primary-color);
+    }
     input {
         outline: transparent;
         border: none;
@@ -108,6 +111,7 @@ const {newRecipe} = storeToRefs(useNewRecipeStore())
         border: none;
         text-align: end;
         padding: 0 .5rem;
+        outline: transparent;
     }
     .fileLabel {
         /* background-color: var(--card-color); */

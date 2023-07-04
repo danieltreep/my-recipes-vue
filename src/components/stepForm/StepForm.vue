@@ -1,9 +1,6 @@
 <template>
-    <form>
+    <form @submit.prevent="handleSubmit">
         <!-- Transition? -->
-        <Step1 v-if="step === 1"/>
-        <Step2 v-if="step === 2"/>
-        <Step3 v-if="step === 3"/>
         <div class="buttons">
             <button :disabled="step === 1" @click.prevent="decrement" class="prev">
                 <span class="material-symbols-outlined">navigate_before</span>
@@ -12,21 +9,36 @@
                 Volgende
                 <span class="material-symbols-outlined">navigate_next</span>
             </button>
-            <button v-if="step === 3" class="save">Opslaan</button>
+            <button type="submit" v-if="step === 3" class="save">Opslaan</button>
         </div>
+        <Step1 v-if="step === 1"/>
+        <Step2 v-if="step === 2"/>
+        <Step3 v-if="step === 3"/>
     </form>
 </template>
 
 <script setup lang="ts">
 import { useStepStore } from '@/stores/step';
+import { useNewRecipeStore } from '@/stores/newRecipe';
 import { storeToRefs } from 'pinia';
+import useCollection from '@/composables/recipes/useCollection'
 
 import Step1 from '@/components/stepForm/Step1.vue'
 import Step2 from './Step2.vue';
 import Step3 from './Step3.vue';
 
 const {step} = storeToRefs(useStepStore())
+const {newRecipe} = storeToRefs(useNewRecipeStore())
 const {increment, decrement} = useStepStore()
+const { addDocument, error, isPending } = useCollection('recipes')
+
+const handleSubmit = async () => {
+    await addDocument(newRecipe.value)
+
+    if (!error.value) {
+        console.log('great succes')
+    }
+}
 
 </script>
 
@@ -46,11 +58,12 @@ const {increment, decrement} = useStepStore()
     }
     form {
         font-size: 14px;
+        margin: 2rem 0 calc(85px + 2rem);
     }
     .buttons {
         display: flex;
         justify-content: space-between;
-        margin: 2rem 0 calc(85px + 2rem);
+        
     }
     .buttons button {
         padding: .6rem .8rem;
