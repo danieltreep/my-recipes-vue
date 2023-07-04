@@ -23,6 +23,7 @@
         display: grid;
         grid-template-columns: 1.8fr 3fr;
         /* height: 110px; */
+        margin-bottom: 1rem;
     }
     .text {
         padding: .7rem;

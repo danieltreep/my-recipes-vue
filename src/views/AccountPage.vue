@@ -44,10 +44,10 @@ const { signout, error } = useSignOut()
 const handleSignOut = async () => {
     await signout()
 
-    if (!error.value) {
-        resetCurrentUser()
-        router.push({name: 'Login'})
-    }
+    
+    resetCurrentUser()
+    router.push({name: 'Login'})
+    
 }
 </script>
 

@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <RecipeList :recipes="documents"/>
+            <RecipeList :recipes="recipes" v-if="recipes"/>
         </div>
     </div>
 </template>
@@ -29,15 +29,18 @@
 import RecipeList from '@/components/recipes/RecipeList.vue'
 import { useRouter } from 'vue-router';
 import getCollection from '@/composables/recipes/getCollection'
+import { onMounted, ref } from 'vue';
+
+const recipes = ref<any>([])
 
 const props = defineProps<{
-    category: {
-        type: string,
-        required: true
-    }
+    category: string
 }>()
 
-const { documents, error } = getCollection('recipes', props.category)
+onMounted(async () => {
+    const { documents, error } = await getCollection('recipes', props.category)
+    recipes.value = documents.value
+})
 
 const router = useRouter()
 
