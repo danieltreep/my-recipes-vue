@@ -1,11 +1,11 @@
 <template>
-    <li class="step">
+    <li class="step box">
         <div class="info">
             <p  class="number">{{ index + 1 }}.</p>
             <!-- <span class="material-symbols-outlined">edit</span> -->
         </div>
         <div>
-            <p>{{ step }}</p>
+            <p>{{ step.charAt(0).toUpperCase() }}{{ step.slice(1) }}</p>
         </div>
     </li>
 </template>

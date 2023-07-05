@@ -1,8 +1,9 @@
 <template>
     <form @submit.prevent="handleSubmit">
         <!-- Transition? -->
-        <div class="buttons">
-            <button :disabled="step === 1" @click.prevent="decrement" class="prev">
+        <!-- <StepButtons /> -->
+        <!-- <div class="buttons">
+            <button type="submit" :disabled="step === 1" @click.prevent="decrement" class="prev">
                 <span class="material-symbols-outlined">navigate_before</span>
             Vorige</button>
             <button v-if="step < 3" @click.prevent="increment" class="next">
@@ -10,7 +11,7 @@
                 <span class="material-symbols-outlined">navigate_next</span>
             </button>
             <button type="submit" v-if="step === 3" class="save">Opslaan</button>
-        </div>
+        </div> -->
         <Step1 v-if="step === 1"/>
         <Step2 v-if="step === 2"/>
         <Step3 v-if="step === 3"/>
@@ -20,23 +21,33 @@
 <script setup lang="ts">
 import { useStepStore } from '@/stores/step';
 import { useNewRecipeStore } from '@/stores/newRecipe';
+import { useCurrentUserStore } from '@/stores/currentUser';
 import { storeToRefs } from 'pinia';
 import useCollection from '@/composables/recipes/useCollection'
+import { useRouter } from 'vue-router';
 
 import Step1 from '@/components/stepForm/Step1.vue'
 import Step2 from './Step2.vue';
 import Step3 from './Step3.vue';
+import StepButtons from './StepButtons.vue';
 
-const {step} = storeToRefs(useStepStore())
-const {newRecipe} = storeToRefs(useNewRecipeStore())
-const {increment, decrement} = useStepStore()
+const { step } = storeToRefs(useStepStore())
+const { newRecipe } = storeToRefs(useNewRecipeStore())
+const { resetRecipe } = useNewRecipeStore()
+const { increment, decrement, resetStep } = useStepStore()
 const { addDocument, error, isPending } = useCollection('recipes')
+
+const router = useRouter()
 
 const handleSubmit = async () => {
     await addDocument(newRecipe.value)
 
     if (!error.value) {
-        console.log('great succes')
+        resetRecipe()
+        resetStep()
+        router.push({name: 'Recipes'})
+    } else {
+        console.log('the recipe could not be saved')
     }
 }
 
@@ -83,5 +94,11 @@ const handleSubmit = async () => {
     }
     .prev {
         border: none;
+    }
+    .error {
+        text-align: center;
+        font-weight: 500;
+        color: red;
+        margin: 1rem;
     }
 </style>

@@ -6,7 +6,7 @@
                 <span class="material-symbols-outlined" @click="router.go(-1)">keyboard_backspace</span>
                 <div class="hero">
                     <span class="material-symbols-outlined">room_service</span>
-                    <h1>{{category}}</h1>
+                    <h1>{{ category.charAt(0).toUpperCase() }}{{ category.slice(1) }}</h1>
                 </div>
             </header>
             <div class="tagsSection">
@@ -27,8 +27,8 @@
 
 <script setup lang="ts">
 import RecipeList from '@/components/recipes/RecipeList.vue'
-import { useRouter } from 'vue-router';
 import getCollection from '@/composables/recipes/getCollection'
+import { useRouter } from 'vue-router';
 import { onMounted, ref } from 'vue';
 
 const recipes = ref<any>([])
@@ -55,6 +55,9 @@ const router = useRouter()
     }
     .hero {
         text-align: center;
+    }
+    h1 {
+        font-weight: 900;
     }
     .hero span {
         color: var(--primary-color);

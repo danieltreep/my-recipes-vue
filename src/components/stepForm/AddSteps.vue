@@ -1,8 +1,10 @@
 <template>
     <div class="addStep">    
         <textarea placeholder="Beschrijf de stap hier ..." class="box" v-model="step"></textarea>
-        
         <button class="box" @click.prevent="handleAddStep">Voeg stap toe</button>
+        <div class="error" v-if="error">
+            <p>Voer tekst in voor u de stap toevoegd</p>
+        </div>
     </div>
 </template>
 
@@ -13,10 +15,18 @@ import { useNewRecipeStore } from '@/stores/newRecipe';
 const { addStep } = useNewRecipeStore()
 
 const step = ref('')
+const error = ref(false)
 
 const handleAddStep = () => {
-    addStep(step.value)
-    step.value = ''
+    if (!step.value.length) {
+        error.value = true
+        return
+    } else {
+        addStep(step.value)
+        step.value = ''
+        error.value = false
+    }
+
 }
 </script>
 

@@ -13,5 +13,8 @@ export const useStepStore = defineStore('step', () => {
         step.value--
     }
 
-    return { step, increment, decrement }
+    const resetStep = () => {
+        step.value = 1
+    }
+    return { step, increment, decrement, resetStep }
 })

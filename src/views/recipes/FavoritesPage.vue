@@ -19,14 +19,22 @@
                     </div>
                 </div>
             </div>
-            <RecipeList />
+            <RecipeList :recipes="recipes"/>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import RecipeList from '@/components/recipes/RecipeList.vue'
+import getCollection from '@/composables/recipes/getCollection'
+import { onMounted, ref } from 'vue';
 
+const recipes = ref<any>([])
+
+onMounted(async () => {
+    const { documents, error } = await getCollection('recipes', 'favorites')
+    recipes.value = documents.value
+})
 </script>
 
 <style lang="css" scoped>

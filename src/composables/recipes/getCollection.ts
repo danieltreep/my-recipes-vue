@@ -1,6 +1,9 @@
 import { ref } from "vue";
 import { db } from "@/firebase/config";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import getUser from "../auth/getUser";
+
+const {user}: any = getUser()
 
 const getCollection = async (col: string, category: string) => {
     const documents = ref<Object[]>([])
@@ -8,7 +11,7 @@ const getCollection = async (col: string, category: string) => {
     let results: Array<any> = []
 
     // Register the firestore collection reference
-    const q = query(collection(db, col), where("category", "==", category))
+    const q = query(collection(db, "users", user.value.uid, col), where("category", "==", category))
     
     const querySnapshot = await getDocs(q)
     querySnapshot.forEach(doc => {
@@ -19,7 +22,11 @@ const getCollection = async (col: string, category: string) => {
     error.value = null
     console.log(documents.value)
 
-    return { documents, error }
+    const getFavorites = () => {
+        
+    }
+
+    return { documents, error, getFavorites }
 }
 
 export default getCollection

@@ -1,5 +1,8 @@
 <template>
-    <div>
+    <form @submit.prevent="handleSubmit">
+        
+        
+        <!-- <button>Volgende</button> -->
         <fieldset>
             <legend>Informatie</legend>
             <div class="inputGroup">
@@ -7,28 +10,28 @@
                     <span class="material-symbols-outlined">title</span>
                     <label for="people">Titel:</label>
                 </div>
-                <input type="text" id="people" v-model="newRecipe.title" >
+                <input type="text" id="people" v-model="newRecipe.title" required>
             </div>
             <div class="inputGroup">
                 <div class="field">
                     <span class="material-symbols-outlined">person</span>
                     <label for="people">Aantal personen:</label>
                 </div>
-                <input type="number" id="people" v-model="newRecipe.people">
+                <input type="number" id="people" v-model="newRecipe.people" required>
             </div>
             <div class="inputGroup">
                 <div class="field">
                     <span class="material-symbols-outlined">schedule</span>
                     <label for="people">Aantal minuten:</label>
                 </div>
-                <input type="number" id="people" v-model="newRecipe.time">
+                <input type="number" id="people" v-model="newRecipe.time" required>
             </div>
             <div class="inputGroup">
                 <div class="field">
                     <span class="material-symbols-outlined">room_service</span>
                     <label for="people">Categorie</label>
                 </div>
-                <select v-model="newRecipe.category">
+                <select v-model="newRecipe.category" required>
                     <option disabled selected>Selecteer</option>
                     <option value="ontbijt">Ontbijt</option>
                     <option value="lunch">Lunch</option>
@@ -61,15 +64,30 @@
                 <input id="fileInput" type="file" accept="image/jpg, image/png">
             </div>
         </fieldset>
-    </div>
+        <div class="buttons">
+            <button type="submit" disabled class="prev">
+                <span class="material-symbols-outlined">navigate_before</span>
+            Vorige</button>
+            <button type="submit" class="next">
+                Volgende
+                <span class="material-symbols-outlined">navigate_next</span>
+            </button>
+        </div>
+    </form>
+    
 </template>
 
 <script setup lang="ts">
 import { useNewRecipeStore } from '@/stores/newRecipe';
+import { useStepStore } from '@/stores/step';
+
 import { storeToRefs } from 'pinia';
+const { increment } = useStepStore()
+const { newRecipe } = storeToRefs(useNewRecipeStore())
 
-const {newRecipe} = storeToRefs(useNewRecipeStore())
-
+const handleSubmit = () => {
+    increment()
+}
 </script>
 
 <style lang="css" scoped>

@@ -43,7 +43,7 @@ const router = createRouter({
       props: true
     },
     {
-      path: '/recipes/:category/:id',
+      path: '/recipes/:id',
       name: 'Recipe',
       component: RecipePage,
       beforeEnter: requireAuth,

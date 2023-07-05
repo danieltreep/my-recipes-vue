@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&family=Roboto+Condensed:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap');
 
 * {
   box-sizing: border-box;
@@ -11,6 +11,7 @@
   --secondary-color: #548498;
   --background-color: #F7F7F7;
   --card-color: white;
+  --header-color: #2e2404;
 
   --font-inactive: #979797;
   --font-color: #464646;
@@ -28,6 +29,7 @@ body {
 .page {
   padding: 1.5rem;
 }
+
 a {
   text-decoration: none;  
 }
@@ -35,8 +37,10 @@ img {
   width: 100%;
   
 }
-h1 {
-  font-family: serif;
+h1,
+h3 {
+  font-family: 'Playfair Display', serif;
+  color: var(--header-color);
 }
 .box {
   background-color: var(--card-color);

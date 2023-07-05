@@ -12,13 +12,14 @@ export const useNewRecipeStore = defineStore('newRecipe', () => {
         category: '',
         description: '',
         ingredients: [],
-        steps: []
+        steps: [],
+        favorite: false
     })
     
     const currentIngredient = ref<Ingredient>({
         name: '',
         amount: null,
-        unit: 'x'
+        unit: ''
     })
 
     const addIngredient = () => {
@@ -33,7 +34,7 @@ export const useNewRecipeStore = defineStore('newRecipe', () => {
 
         currentIngredient.value.amount = null
         currentIngredient.value.name = ''
-        currentIngredient.value.unit = 'x'
+        currentIngredient.value.unit = ''
     }
 
     const deleteIngredient = (i: number) => {
@@ -44,5 +45,17 @@ export const useNewRecipeStore = defineStore('newRecipe', () => {
         newRecipe.value.steps.push(step)
     }
 
-  return { newRecipe, currentIngredient, addIngredient, deleteIngredient, addStep}
+    const resetRecipe = () => {
+        newRecipe.value = {
+            title: '',
+            people: null,
+            time: null,
+            category: '',
+            description: '',
+            ingredients: [],
+            steps: [],
+            favorite: false
+        }
+    }
+  return { newRecipe, currentIngredient, addIngredient, deleteIngredient, addStep, resetRecipe}
 })

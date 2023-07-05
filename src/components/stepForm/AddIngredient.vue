@@ -4,19 +4,29 @@
             <div class="box">
                 <input type="text" placeholder="Ingredient" v-model="currentIngredient.name">
             </div>
-            <div class="box">
-                <input type="number" placeholder="40" class="hoeveelheid" v-model="currentIngredient.amount">
+            <div class="box eenheid">
+                <input type="number" placeholder="??" class="hoeveelheid" v-model="currentIngredient.amount">
                 <select v-model="currentIngredient.unit">
-                    <option value="aantal" selected disabled>Aantal</option>
-                    <option value="mg">mg</option>
-                    <option value="g">g</option>
-                    <option value="kg">kg</option>
-                    <option value="ml">ml</option>
-                    <option value="l">l</option>
-                    <option value="x">x</option>
+                    <optgroup label="Gewicht">
+                        <option value="mg">milligram</option>
+                        <option value="g">gram</option>
+                        <option value="kg">kilogram</option>
+                    </optgroup>
+                    <optgroup label="vloeistof">
+                        <option value="ml">milliliter</option>
+                        <option value="l">liter</option>
+                    </optgroup>
+                    <optgroup label="Hoeveelheid">
+                        <option value="stuk(s)">stuk(s)</option>
+                        <option value="el">el</option>
+                        <option value="tl">tl</option>
+                    </optgroup>
                 </select>
             </div>
-            <button class="box add" @click.prevent="addIngredient">+</button>
+            <button class="box add" @click.prevent="handleAddIngredient">+</button>
+        </div>
+        <div class="error" v-if="error">
+            <p>Voer een ingredient in</p>
         </div>
     </div>
 </template>
@@ -24,9 +34,22 @@
 <script setup lang="ts">
 import { useNewRecipeStore } from '@/stores/newRecipe';
 import { storeToRefs } from 'pinia';
+import { ref } from 'vue';
 
-const {currentIngredient} = storeToRefs(useNewRecipeStore())
-const {addIngredient} = useNewRecipeStore()
+const { currentIngredient } = storeToRefs(useNewRecipeStore())
+const { addIngredient } = useNewRecipeStore()
+
+const error = ref(false)
+
+const handleAddIngredient = () => {
+    if (!currentIngredient.value.name.length) {
+        error.value = true
+        return
+    } else {
+        addIngredient()
+        error.value = false
+    }
+}
 </script>
 
 <style lang="css" scoped>
@@ -51,11 +74,16 @@ const {addIngredient} = useNewRecipeStore()
         width: 100%;
         outline: transparent;
     }
+    .eenheid {
+        display: grid;
+        grid-template-columns: 30px 1fr;
+    }
     select {
         border: none;
         padding-right: .5rem;
-        text-align: end;
+        /* text-align: end; */
         outline: transparent;
+        width: 100%;
     }
     .add {
         border: 1px solid var(--secondary-color);

@@ -1,6 +1,6 @@
 <template>
     <div class="recipeList" v-if="recipes.length">
-        <RecipeThumbnail v-for="(recipe, index) in recipes" :key="index" :recipe="recipe"/>
+        <RecipeThumbnail v-for="recipe in recipes" :key="recipe.id" :recipe="recipe"/>
     </div>
     <div v-else>
         <NoRecipesVue />
@@ -11,7 +11,7 @@
 import NoRecipesVue from '../NoRecipes.vue';
 import RecipeThumbnail from './RecipeThumbnail.vue';
 
-const props = defineProps<{
+defineProps<{
     recipes: Object[]
 }>()
 
