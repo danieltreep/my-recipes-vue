@@ -3,7 +3,8 @@
         <header>
             <span class="material-symbols-outlined">keyboard_backspace</span>
             <h3>Mijn Account</h3>
-            <span class="material-symbols-outlined">more_vert</span>
+            <span class="material-symbols-outlined" @click="moreOptions = !moreOptions">more_vert</span>
+            <AccountOptions v-if="moreOptions" @delete="openModal"/>
         </header>
         <div class="profile">
             <span class="material-symbols-outlined">account_circle</span>
@@ -27,6 +28,7 @@
             <p>Logout</p>
             <span class="material-symbols-outlined">logout</span>
         </div>
+        <DeleteModal v-if="modal" @delete="handleDelete" @cancel="closeModal"/>
     </div>
 </template>
 
@@ -34,8 +36,14 @@
 import { useRouter } from 'vue-router';
 import useSignOut from '@/composables/auth/useSignOut';
 import { useCurrentUserStore } from '@/stores/currentUser';
+import { ref } from 'vue';
+import useDeleteUser from '@/composables/auth/deleteUser'
 
+import AccountOptions from '@/components/AccountOptions.vue';
+import DeleteModal from '@/components/DeleteModal.vue';
 
+const moreOptions = ref<boolean>(false)
+const modal = ref<boolean>(false)
 const router = useRouter()
 
 const {currentUser, resetCurrentUser} = useCurrentUserStore()
@@ -43,12 +51,31 @@ const { signout, error } = useSignOut()
 
 const handleSignOut = async () => {
     await signout()
-
-    
-    resetCurrentUser()
-    router.push({name: 'Login'})
-    
+        .then(() => {
+            router.push({name: 'Login'})
+            resetCurrentUser()
+        })
 }
+
+const openModal = () => {
+    modal.value = true
+    moreOptions.value = false
+}
+
+const closeModal = () => {
+    modal.value = false
+}
+
+const handleDelete = async () => {
+    await useDeleteUser()
+        .then(() => {
+            console.log('succes from handleDelete')
+            modal.value = false
+            resetCurrentUser()
+            router.push({name: 'Login'})
+        })
+}
+
 </script>
 
 <style lang="css" scoped>
@@ -56,6 +83,7 @@ const handleSignOut = async () => {
         display: flex;
         justify-content: space-between;
         margin-top: 1rem;
+        position: relative;
     }
     .profile {
         text-align: center;

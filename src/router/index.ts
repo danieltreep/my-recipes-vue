@@ -38,14 +38,14 @@ const router = createRouter({
     {
       path: '/recipes/:category',
       name: 'Category',
-      component: CategoryPage,
+      component: () => import('../views/recipes/CategoryPage.vue') ,
       beforeEnter: requireAuth,
       props: true
     },
     {
       path: '/recipes/:id',
       name: 'Recipe',
-      component: RecipePage,
+      component: () => import('../views/recipes/RecipePage.vue'),
       beforeEnter: requireAuth,
       props: true
     },
@@ -57,24 +57,24 @@ const router = createRouter({
     {
       path: '/signup',
       name: 'Signup',
-      component: SignupPage
+      component: () => import('../views/auth/SignupPage.vue')
     },
     {
       path: '/new',
       name: 'NewRecipe',
-      component: NewRecipePage,
+      component: () => import('../views/recipes/NewRecipePage.vue'),
       beforeEnter: requireAuth
     },
     {
       path: '/favorites',
       name: 'Favorites',
-      component: FavoritesPage,
+      component: () => import('../views/recipes/FavoritesPage.vue'),
       beforeEnter: requireAuth
     },
     {
       path: '/account',
       name: 'Account',
-      component: AccountPage,
+      component: () => import('../views/AccountPage.vue'),
       beforeEnter: requireAuth
     },
   ]

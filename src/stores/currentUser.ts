@@ -6,10 +6,10 @@ export const useCurrentUserStore = defineStore('currentUser', () => {
   
   const { user } = getUser()
 
-  const currentUser = ref<object>(user)
+  const currentUser = ref<any>(user)
   
   const resetCurrentUser = () => {
-    currentUser.value = {}
+    currentUser.value = null
   }
 
   return { currentUser, resetCurrentUser }

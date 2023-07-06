@@ -2,8 +2,8 @@
     <div class="startPage">
         <div class="container">
             <img src="@/assets/logo.svg" alt="">
-            <form @submit.prevent="handleSubmit">
-                <div class="inputField">
+            <form @submit.prevent="handleSubmit" v-if="!recover">
+                <div class="inputField" >
                     <input type="text" placeholder="Email" v-model="email">
                     <span class="material-symbols-outlined">email</span>
                 </div>
@@ -11,18 +11,21 @@
                     <input type="password" placeholder="Wachtwoord" v-model="password">
                     <span class="material-symbols-outlined">lock</span>
                 </div>
-                <p class="vergeten">Wachtwoord vergeten?</p>
+                <p class="vergeten" @click="recover = !recover">Wachtwoord vergeten?</p>
+                
                 <button>
                     <p>Login</p>
                     <span class="material-symbols-outlined">login</span>
                 </button>
                 <p>Heb je nog geen account? <router-link :to="{name: 'Signup'}">Signup</router-link></p>
             </form>
+            <ForgotPassword v-if="recover"/>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import ForgotPassword from '@/components/ForgotPassword.vue';
 import useLogin from '@/composables/auth/useLogin';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -31,6 +34,7 @@ const { login, error, isPending } = useLogin()
 const email = ref<string>('')
 const password = ref<string>('')
 const router = useRouter()
+const recover = ref(false)
 
 const handleSubmit = async () => {
     await login(email.value, password.value)

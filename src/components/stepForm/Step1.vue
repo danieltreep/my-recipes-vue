@@ -48,9 +48,9 @@
             <legend>Beschrijving (optioneel)</legend>
             <textarea placeholder="Beschrijving" rows="4" v-model="newRecipe.description"></textarea>
         </fieldset>
-        <fieldset>
+        <!-- <fieldset>
             <legend>Tags</legend>
-        </fieldset>
+        </fieldset> -->
         <fieldset>
             <legend>Afbeelding (optioneel)</legend>
             <div class="inputGroup">

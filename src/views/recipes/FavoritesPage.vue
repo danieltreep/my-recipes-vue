@@ -3,10 +3,8 @@
         <img src="@/assets/food.jpg" alt="">
         <div class="page">
             <header>
-                
-                    <span class="material-symbols-outlined">favorite</span>
-                    <h1>Favorieten</h1>
-                
+                <span class="material-symbols-outlined">favorite</span>
+                <h1>Favorieten</h1>
             </header>
             <div class="tagsSection">
                 <div class="tagsHeader">
@@ -32,7 +30,7 @@ import { onMounted, ref } from 'vue';
 const recipes = ref<any>([])
 
 onMounted(async () => {
-    const { documents, error } = await getCollection('recipes', 'favorites')
+    const { documents, error } = await getCollection('recipes', 'favorite', true)
     recipes.value = documents.value
 })
 </script>

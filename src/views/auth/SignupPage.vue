@@ -15,7 +15,6 @@
                     <input type="password" placeholder="Wachtwoord" v-model="password">
                     <span class="material-symbols-outlined">lock</span>
                 </div>
-                <p class="vergeten">Wachtwoord vergeten?</p>
                 <button>
                     <p>Signup</p>
                     <span class="material-symbols-outlined">login</span>
@@ -95,7 +94,7 @@ const handleSubmit = async () => {
         margin: .5rem;
         font-size: 12px;
     }
-    p:nth-of-type(2) {
+    p:nth-of-type(1) {
         font-weight: 500;
     }
     span {

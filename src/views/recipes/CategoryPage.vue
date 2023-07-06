@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src="@/assets/food.jpg" alt="">
+        <img :src="imageUrl" alt="">
         <div class="page">
             <header>
                 <span class="material-symbols-outlined" @click="router.go(-1)">keyboard_backspace</span>
@@ -37,8 +37,10 @@ const props = defineProps<{
     category: string
 }>()
 
+const imageUrl = ref<string>(new URL(`/src/assets/categories/${props.category}.jpg`, import.meta.url).href)
+
 onMounted(async () => {
-    const { documents, error } = await getCollection('recipes', props.category)
+    const { documents, error } = await getCollection('recipes', 'category', props.category)
     recipes.value = documents.value
 })
 

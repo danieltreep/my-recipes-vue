@@ -7,16 +7,17 @@
                 <span 
                     class="material-symbols-outlined fav" 
                     @click="handleFav"
-                    v-if="!fav"
+                    v-if="!selectedRecipe.favorite"
                 >favorite_border</span>
                 <span 
                     class="material-icons fav" 
                     @click="handleFav"
-                    v-if="fav" 
+                    v-if="selectedRecipe.favorite" 
                 >favorite</span>
-                <span class="material-symbols-outlined">more_vert</span>
+                <span class="material-symbols-outlined" @click="showOptions = !showOptions">more_vert</span>
+                <RecipeOptions v-if="showOptions" @delete="handleDelete"/>
             </header>
-            <SingleRecipe :recipe="singleRecipe" v-if="singleRecipe"/>
+            <SingleRecipe :recipe="selectedRecipe" v-if="selectedRecipe"/>
             <!-- Suspense -->
         </div>
     </div>
@@ -24,13 +25,23 @@
 
 <script setup lang="ts">
 import getDocument from '@/composables/recipes/getDocument';
+import setFavorite from '@/composables/recipes/setFavorite'
 import SingleRecipe from '@/components/recipes/SingleRecipe.vue';
+import RecipeOptions from '@/components/RecipeOptions.vue';
+
+import { useSelectedRecipeStore } from '@/stores/currentRecipe';
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import setFavorite from '@/composables/recipes/setFavorite'
+import { storeToRefs } from 'pinia';
+import { useCurrentUserStore } from '@/stores/currentUser';
 
-const singleRecipe = ref<any>(null)
-const fav = ref<boolean>(false)
+import useDeleteDocument from '@/composables/recipes/deleteDocument'
+
+const { selectedRecipe } = storeToRefs(useSelectedRecipeStore())
+const { updateRecipe } = useSelectedRecipeStore()
+const { currentUser } = useCurrentUserStore()
+
+const showOptions = ref(false)
 
 const props = defineProps<{
     id: string
@@ -38,15 +49,19 @@ const props = defineProps<{
 
 onMounted(async () => {
     const {recipe} = await getDocument(props.id)
-    singleRecipe.value = recipe.value
-    fav.value = recipe.value.favorite
+    updateRecipe(recipe.value)
 })
 
 const router = useRouter()
 
 const handleFav = async () => {
-    fav.value = !fav.value
-    await setFavorite(props.id, fav.value)
+    selectedRecipe.value.favorite = !selectedRecipe.value.favorite
+    await setFavorite(props.id, !selectedRecipe.value.favorite)
+}
+
+const handleDelete = async () => {
+    console.log('deleted')
+    await useDeleteDocument(currentUser.uid, selectedRecipe.value.id)
 }
 
 </script>
