@@ -62,6 +62,7 @@ const handleFav = async () => {
 const handleDelete = async () => {
     console.log('deleted')
     await useDeleteDocument(currentUser.uid, selectedRecipe.value.id)
+    router.go(-1)
 }
 
 </script>

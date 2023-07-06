@@ -8,6 +8,6 @@ export interface Recipe {
     description?: string,
     ingredients: Array<Ingredient>,
     steps: Array<string>,
-    id?: string,
+    id: string,
     favorite: boolean
 }

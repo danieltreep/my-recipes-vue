@@ -11,6 +11,7 @@ export const useSelectedRecipeStore = defineStore('selectedRecipe', () => {
         category: '',
         description: '',
         ingredients: [],
+        id: '',
         steps: [],
         favorite: false
     })
