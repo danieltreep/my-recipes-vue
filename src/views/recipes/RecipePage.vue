@@ -56,7 +56,7 @@ const router = useRouter()
 
 const handleFav = async () => {
     selectedRecipe.value.favorite = !selectedRecipe.value.favorite
-    await setFavorite(props.id, !selectedRecipe.value.favorite)
+    await setFavorite(props.id, selectedRecipe.value.favorite)
 }
 
 const handleDelete = async () => {
