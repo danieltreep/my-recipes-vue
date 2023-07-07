@@ -1,7 +1,6 @@
 <template>
     <div class="page">
         <header>
-            <span class="material-symbols-outlined">keyboard_backspace</span>
             <h3>Mijn Account</h3>
             <span class="material-symbols-outlined" @click="moreOptions = !moreOptions">more_vert</span>
             <AccountOptions v-if="moreOptions" @delete="openModal"/>
@@ -81,9 +80,13 @@ const handleDelete = async () => {
 <style lang="css" scoped>
     header {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         margin-top: 1rem;
         position: relative;
+    }
+    header span {
+        position: absolute;
+        right: 0;
     }
     .profile {
         text-align: center;

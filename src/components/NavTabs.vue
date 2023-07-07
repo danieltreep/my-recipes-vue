@@ -1,25 +1,25 @@
 <template>
     <nav>
         <router-link :to="{name: 'Recipes'}" >
-            <div class="link">
+            <div :class="route.path.includes('recipes') ? 'router-link-active' : ''">
                 <span class="material-symbols-outlined">menu_book</span>
                 <p>Recepten</p>
             </div>
         </router-link>
         <router-link :to="{name: 'NewRecipe'}">
-            <div class="link"> 
+            <div> 
                 <span class="material-symbols-outlined">add_circle</span>
                 <p>Nieuw</p>
             </div>
         </router-link>
         <router-link :to="{name: 'Favorites'}">
-            <div class="link">
+            <div>
                 <span class="material-symbols-outlined">favorite</span>
                 <p>Favorieten</p>
             </div>
         </router-link>
         <router-link :to="{name: 'Account'}">
-            <div class="link">
+            <div>
                 <span class="material-symbols-outlined">account_circle</span>
                 <p>Account</p>
             </div>
@@ -28,6 +28,10 @@
 </template>
 
 <script setup lang="ts">
+
+import { useRoute } from 'vue-router';
+
+const route = useRoute()
 
 </script>
 

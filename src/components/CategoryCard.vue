@@ -38,4 +38,7 @@ const imageUrl = ref<string>(new URL(`/src/assets/vectors/${props.cat}.svg`, imp
     img {
         height: 100%;
     }
+    img:last-of-type {
+        height: 80%;
+    }
 </style>
