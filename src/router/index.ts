@@ -1,14 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useCurrentUserStore } from '@/stores/currentUser'
-
 import RecipesPage from '../views/recipes/RecipesPage.vue'
-import RecipePage from '../views/recipes/RecipePage.vue'
 import LoginPage from '../views/auth/LoginPage.vue'
-import SignupPage from '../views/auth/SignupPage.vue'
-import NewRecipePage from '../views/recipes/NewRecipePage.vue'
-import FavoritesPage from '../views/recipes/FavoritesPage.vue'
-import AccountPage from '../views/AccountPage.vue'
-import CategoryPage from '../views/recipes/CategoryPage.vue'
 
 // Route guard
 import { auth } from '@/firebase/config'
@@ -27,7 +19,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/login'
+      redirect: '/recipes'
     },
     {
       path: '/recipes',
