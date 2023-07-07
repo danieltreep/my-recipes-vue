@@ -2,7 +2,7 @@
     <header>
         <div class="flex">
             <img src="@/assets/logo.svg">
-            <p>Hi {{currentUser.displayName}}</p>
+            <p>Hi {{currentUser.displayName}}.</p>
         </div>
         <SearchBar />
         <h1>Kies je categorie</h1>
@@ -31,10 +31,11 @@ h1 {
     margin-bottom: 1rem;
 }
 p {
-    font-family: serif;
+    font-family: 'Playfair Display', serif;
     position: absolute;
     right: 0;
     bottom: .6rem;
     font-size: 14px;
+    font-weight: 600;
 }
 </style>

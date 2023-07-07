@@ -14,7 +14,7 @@
                 <h1>{{ recipe.title.charAt(0).toUpperCase() }}{{ recipe.title.slice(1) }}</h1>
                 <p class="description">{{ recipe.description?.charAt(0).toUpperCase() }}{{ recipe.description?.slice(1) }}</p>
             </div>
-            <div class="tagsSection">
+            <!-- <div class="tagsSection">
                 <div class="tagsHeader">
                     <p>Tags</p>
                 </div>
@@ -23,14 +23,15 @@
                         <p>Zoet</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
+
             <div class="persons box">
                 <span class="material-symbols-outlined">person</span>
                 <p>Aantal personen</p>
                 <div class="counter">
-                    <span>-</span>
-                    <p>4</p>
-                    <span>+</span>
+                    <span @click="handleDecrement">-</span>
+                    <p>{{ selectedRecipe.people }}</p>
+                    <span @click="handleIncrement">+</span>
                 </div>
             </div>
             <div>
@@ -44,7 +45,7 @@
                     :edit="false"
                 />
                 <ul v-show="tab === 's'">
-                    <StepsListItemVue v-for="(step, index) in recipe.steps" :key="index" :step="step" :index="index"/>
+                    <StepsListItemVue v-for="(step, index) in recipe.steps" :key="index" :step="step" :index="index" :show-edit="false"/>
                 </ul>
             </div>
     </div>
@@ -55,13 +56,42 @@ import { ref } from 'vue';
 import type { Recipe } from '@/types/Recipe';
 import IngredientsList from '../ingredients/IngredientsList.vue';
 import StepsListItemVue from '../stepForm/StepsListItem.vue';
+import { storeToRefs } from 'pinia';
+import {useSelectedRecipeStore} from '@/stores/currentRecipe'
+import type { Ingredient } from '@/types/Ingredient';
 
+const { selectedRecipe } = storeToRefs(useSelectedRecipeStore())
 
 defineProps<{
     recipe: Recipe
 }>()
 
 const tab = ref<string>('i')
+
+const handleDecrement = () => {
+    console.log()
+    if (selectedRecipe.value.people > 1) {
+        selectedRecipe.value.people--
+        
+        selectedRecipe.value.ingredients.forEach((ingredient: Ingredient) => {
+
+            if(ingredient.amount) {
+                ingredient.amount = ingredient.amount.valueOf() / (selectedRecipe.value.people + 1) * selectedRecipe.value.people
+            }
+        })
+    }
+}
+
+const handleIncrement = () => {
+    selectedRecipe.value.people++
+    
+    selectedRecipe.value.ingredients.forEach((ingredient: Ingredient) => {
+
+        if(ingredient.amount) {
+            ingredient.amount = ingredient.amount.valueOf() / (selectedRecipe.value.people - 1) * selectedRecipe.value.people
+        }
+    })
+}
 
 </script>
 

@@ -2,7 +2,7 @@ import type { Ingredient } from "./Ingredient"
 
 export interface Recipe {
     title: string,
-    people: null | number,
+    people: number,
     time: null | number,
     category: string,
     description?: string,

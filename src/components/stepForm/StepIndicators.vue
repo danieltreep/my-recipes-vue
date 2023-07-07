@@ -1,12 +1,12 @@
 <template>
     <div class="steps">
-        <div class="step" :class="step === 1 ? 'active' : ''">
+        <div class="step" :class="step >= 1 ? 'active' : ''">
             <div class="circle">
                 <span class="material-symbols-outlined">info</span>
             </div>
             <p>Details</p>
         </div>
-        <div class="step" :class="step === 2 ? 'active' : ''">
+        <div class="step" :class="step >= 2 ? 'active' : ''">
             <div class="circle">
                 <span class="material-symbols-outlined">bakery_dining</span>
             </div>
@@ -19,17 +19,34 @@
             <p>Stappen</p>
         </div>
         <div class="bar">
-            <div class="progress" ref="progress" ></div>
+            <div class="progress" :style="styles"></div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onUpdated, ref, watch } from 'vue';
 import { useStepStore } from '@/stores/step';
 import { storeToRefs } from 'pinia';
 
 const { step } = storeToRefs(useStepStore())
+const styles = ref({})
+
+watch(step, () => {
+    if (step.value === 1) {
+        styles.value = {
+            width: '15%'
+        }
+    } else if (step.value === 2) {
+        styles.value = {
+            width: '60%'
+        }
+    } else {
+        styles.value = {
+            width: '100%'
+        }
+    }
+})
 
 </script>
 
@@ -72,13 +89,14 @@ const { step } = storeToRefs(useStepStore())
     height: 3px;
     width: 30px;
     background-color: var(--primary-color);
+    transition: .3s;
 }
 .material-symbols-outlined {
     font-size: 16px;
 }
 .active {
     color: var(--font-color);
-    transition: .3s;
+    transition: .5s;
 }
 .active .circle {
     border-color: var(--primary-color);

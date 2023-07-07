@@ -8,7 +8,7 @@ export const useNewRecipeStore = defineStore('newRecipe', () => {
         
     const newRecipe = ref<Recipe>({
         title: '',
-        people: null,
+        people: 0,
         time: null,
         category: '',
         description: '',
@@ -48,10 +48,14 @@ export const useNewRecipeStore = defineStore('newRecipe', () => {
         newRecipe.value.steps.push(step)
     }
 
+    const updateStep = (step: string, index: number) => {
+        newRecipe.value.steps[index] = step
+    }
+
     const resetRecipe = () => {
         newRecipe.value = {
             title: '',
-            people: null,
+            people: 0,
             time: null,
             category: '',
             description: '',
@@ -80,6 +84,7 @@ export const useNewRecipeStore = defineStore('newRecipe', () => {
         deleteIngredient, 
         addStep, 
         resetRecipe,
-        updateRecipeImage
+        updateRecipeImage,
+        updateStep
     }
 })

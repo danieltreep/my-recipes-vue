@@ -8,7 +8,8 @@
                     :key="index" 
                     :step="step"
                     :index="index"
-                    />
+                    :show-edit="true"
+                />
                 </ul>
                 <AddSteps />
             </fieldset>

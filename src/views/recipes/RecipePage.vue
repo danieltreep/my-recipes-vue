@@ -17,7 +17,7 @@
                 <span class="material-symbols-outlined" @click="showOptions = !showOptions">more_vert</span>
                 <RecipeOptions v-if="showOptions" @delete="handleDelete"/>
             </header>
-            <SingleRecipe :recipe="recipe" v-if="recipe"/>
+            <SingleRecipe :recipe="selectedRecipe" v-if="selectedRecipe"/>
             <!-- Suspense -->
         </div>
     </div>
@@ -33,13 +33,10 @@ import { useSelectedRecipeStore } from '@/stores/currentRecipe';
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
-import { useCurrentUserStore } from '@/stores/currentUser';
 
 import useDeleteDocument from '@/composables/recipes/deleteDocument'
 
 const { selectedRecipe } = storeToRefs(useSelectedRecipeStore())
-const { updateRecipe } = useSelectedRecipeStore()
-const { currentUser } = useCurrentUserStore()
 
 const showOptions = ref(false)
 
@@ -50,17 +47,13 @@ const props = defineProps<{
 // Store image url
 const imageUrl = ref('')
 
-// Store currentRecipe
-const recipe = ref(selectedRecipe)
-
 onMounted(async () => {
-    const { recipe } = await getDocument(props.id)
-    updateRecipe(recipe.value)
+    await getDocument(props.id)
 
     if (selectedRecipe.value.imageUrl) {
         imageUrl.value = selectedRecipe.value.imageUrl
     } else if (!selectedRecipe.value.imageUrl) {
-        imageUrl.value = new URL(`/src/assets/categories/${recipe.value.category}.jpg`, import.meta.url).href
+        imageUrl.value = new URL(`/src/assets/categories/${selectedRecipe.value.category}.jpg`, import.meta.url).href
     }
 })
 
@@ -73,7 +66,7 @@ const handleFav = async () => {
 
 const handleDelete = async () => {
     console.log('deleted')
-    await useDeleteDocument(currentUser.uid, selectedRecipe.value.id)
+    await useDeleteDocument(selectedRecipe.value.id)
     router.go(-1)
 }
 

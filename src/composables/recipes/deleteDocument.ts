@@ -1,9 +1,12 @@
-import { db } from '@/firebase/config'
+import { db} from '@/firebase/config'
 import { deleteDoc, doc } from 'firebase/firestore';
+import { useCurrentUserStore } from '@/stores/currentUser';
 
-const useDeleteDocument = async (uid: string, recipeId: string) => {
+const { currentUser } = useCurrentUserStore()
+
+const useDeleteDocument = async (recipeId: string) => {
     
-    const docRef = doc(db, "users", uid, 'recipes', recipeId)
+    const docRef = doc(db, "users", currentUser.uid, 'recipes', recipeId)
 
     await deleteDoc(docRef)
         .then(() => {

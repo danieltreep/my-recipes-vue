@@ -3,6 +3,9 @@ import { ref, type Ref } from 'vue'
 import { collection, getDoc, query, doc, where } from "firebase/firestore";
 import getUser from "../auth/getUser";
 import type { Recipe } from "@/types/Recipe";
+import { useSelectedRecipeStore } from '@/stores/currentRecipe';
+
+const { updateRecipe } = useSelectedRecipeStore()
 
 const {user}: any = getUser()
 
@@ -32,6 +35,7 @@ const getDocument = async (id: string) => {
     }
     error.value = null
     // console.log(recipe.value)
+    updateRecipe(recipe.value)
     
     return { recipe, error }
 }

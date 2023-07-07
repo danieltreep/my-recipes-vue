@@ -92,7 +92,7 @@ import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 
 const { increment } = useStepStore()
-const { newRecipe } = storeToRefs(useNewRecipeStore())
+const { newRecipe, newRecipeImage } = storeToRefs(useNewRecipeStore())
 const { updateRecipeImage } = useNewRecipeStore()
 
 const imageUrl = ref('')
