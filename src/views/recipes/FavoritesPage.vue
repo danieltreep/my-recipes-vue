@@ -17,7 +17,10 @@
                     </div>
                 </div>
             </div>
-            <RecipeList :recipes="recipes"/>
+            <RecipeList :recipes="recipes" v-if="recipes.length"/>
+            <div v-else class="niks">
+                <p>Je hebt nog geen favorieten</p>
+            </div>
         </div>
     </div>
 </template>
@@ -41,6 +44,7 @@ onMounted(async () => {
         background-image: linear-gradient(#ffffff90, var(--background-color) 80px);
         backdrop-filter: blur(10px);
         transform: translateY(-100px);
+        text-align: center;
     }
     header {
         text-align: center;
@@ -71,5 +75,8 @@ onMounted(async () => {
         height: 300px;
         object-fit: cover;
         filter: brightness(80%);
+    }
+    .niks {
+        margin-top: 2rem;
     }
 </style>

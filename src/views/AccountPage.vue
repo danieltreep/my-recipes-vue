@@ -32,12 +32,20 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-import useSignOut from '@/composables/auth/useSignOut';
-import { useCurrentUserStore } from '@/stores/currentUser';
-import { ref } from 'vue';
-import useDeleteUser from '@/composables/auth/deleteUser'
 
+// External
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+
+// Stores
+import { useCurrentUserStore } from '@/stores/currentUser';
+import { useNewRecipeStore } from '@/stores/newRecipe';
+
+// Functions
+import useDeleteUser from '@/composables/auth/deleteUser'
+import useSignOut from '@/composables/auth/useSignOut';
+
+// Components 
 import AccountOptions from '@/components/AccountOptions.vue';
 import DeleteModal from '@/components/DeleteModal.vue';
 
@@ -47,12 +55,14 @@ const router = useRouter()
 
 const {currentUser, resetCurrentUser} = useCurrentUserStore()
 const { signout, error } = useSignOut()
+const { resetRecipe } = useNewRecipeStore()
 
 const handleSignOut = async () => {
     await signout()
         .then(() => {
             router.push({name: 'Login'})
             resetCurrentUser()
+            resetRecipe()
         })
 }
 

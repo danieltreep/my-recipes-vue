@@ -21,6 +21,7 @@ const {currentUser} = useCurrentUserStore()
 .flex {
     display: flex;
     position: relative;
+    margin: 1rem;
 }
 img {
     max-height: 55px;
