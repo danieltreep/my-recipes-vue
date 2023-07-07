@@ -1,7 +1,7 @@
 <template>
-    <router-link :to="{name: 'Recipe', params: {id: recipe.id}}">
+    <router-link :to="{name: 'Recipe', params: {category: recipe.category, id: recipe.id}}">
         <div class="recipeThumb box">
-            <img src="@/assets/food.jpg" alt="">
+            <img :src="image" alt="">
             <div class="text">
                 <h3>{{ recipe.title.charAt(0).toUpperCase() }}{{ recipe.title.slice(1) }}</h3>
                 <p class="description">{{ recipe.description?.charAt(0).toUpperCase() }}{{ recipe.description?.slice(1) }}</p>
@@ -22,10 +22,21 @@
 
 <script setup lang="ts">
 import type { Recipe } from '@/types/Recipe';
+import { ref, onMounted } from 'vue';
 
-defineProps<{
+const props = defineProps<{
     recipe: Recipe
 }>()
+
+const image = ref('')
+
+onMounted(() => {
+    if (props.recipe.imageUrl) {
+        image.value = props.recipe.imageUrl
+    } else {
+        image.value = new URL(`/src/assets/categories/${props.recipe.category}.jpg`, import.meta.url).href
+    }
+})
 </script>
 
 <style lang="css" scoped>
@@ -34,8 +45,8 @@ defineProps<{
         overflow: hidden;
         display: grid;
         grid-template-columns: 1.5fr 3fr;
-        /* height: 110px; */
-        /* min-height: 100px; */
+        max-height: 110px;
+        min-height: 100px;
         margin-bottom: 1rem;
     }
     .text {
@@ -83,7 +94,7 @@ defineProps<{
     }
     img {
         object-fit: cover;
-        object-position: center;
+        object-position: center center;
         height: 100%;
     }
     a {

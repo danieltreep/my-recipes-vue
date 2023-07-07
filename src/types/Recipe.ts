@@ -9,5 +9,8 @@ export interface Recipe {
     ingredients: Array<Ingredient>,
     steps: Array<string>,
     id: string,
-    favorite: boolean
+    favorite: boolean,
+    filePath?: string,
+    imageUrl?: string,
+    createdAt?: object
 }

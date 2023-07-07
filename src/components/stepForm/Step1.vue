@@ -53,15 +53,22 @@
         </fieldset> -->
         <fieldset>
             <legend>Afbeelding (optioneel)</legend>
-            <div class="inputGroup">
-                <div class="field">
-                    <span class="material-symbols-outlined">add_a_photo</span>
-                    <p>Voeg afbeelding toe</p>
-                </div>
+            <div class="image box" v-if="imageUrl">
+                <img :src="imageUrl" >
+            </div>
+            <div class="addImage">
+                
                 <label for="fileInput" class="fileLabel">
-                    <p>Add</p>
+                    <span class="material-symbols-outlined">add_photo_alternate</span>
+                    
+                    <p>Voeg een afbeelding toe</p>
                 </label>
-                <input id="fileInput" type="file" accept="image/jpg, image/png">
+                <label class="fileLabel" v-if="imageUrl"  @click.prevent="imageUrl = ''">
+                    <span class="material-symbols-outlined">refresh</span>
+                    
+                    <p>Reset</p>
+                </label>
+                <input id="fileInput" type="file" accept="image/jpeg, image/png" @change="handleChange">
             </div>
         </fieldset>
         <div class="buttons">
@@ -82,11 +89,29 @@ import { useNewRecipeStore } from '@/stores/newRecipe';
 import { useStepStore } from '@/stores/step';
 
 import { storeToRefs } from 'pinia';
+import { ref } from 'vue';
+
 const { increment } = useStepStore()
 const { newRecipe } = storeToRefs(useNewRecipeStore())
+const { updateRecipeImage } = useNewRecipeStore()
+
+const imageUrl = ref('')
+const file = ref(null)
 
 const handleSubmit = () => {
     increment()
+}
+
+const handleChange = (event: any) => {
+    const selected = event.target.files[0]
+
+    if (selected) {
+        imageUrl.value = URL.createObjectURL(event.target.files[0])
+        updateRecipeImage(selected)
+    } else {
+        file.value = null
+        imageUrl.value = ''
+    }
 }
 </script>
 
@@ -103,6 +128,7 @@ const handleSubmit = () => {
         border: none;
         gap: .5rem;
         outline: transparent;
+        resize: vertical;
     }
     .field {
         display: flex;
@@ -135,15 +161,29 @@ const handleSubmit = () => {
         /* background-color: var(--card-color); */
         display: flex;
         align-items: center;
-        border: 1px solid var(--primary-color);
+        /* border: 1px solid var(--primary-color); */
         padding: .1rem .5rem;
         /* width: fit-content; */
         border-radius: var(--border-radius-l);
         font-size: 14px;
         gap: .2rem;
+        background-color: var(--card-color);
+        width: fit-content;
+        box-shadow: var(--box-shadow);
+        padding: .5rem .8rem;
     }
     .fileLabel .material-symbols-outlined {
         font-size: 20px;
     }   
-    
+    .image {
+        padding: 1rem;
+    }
+    .image img {
+        border-radius: var(--border-radius-s);
+    }
+    .addImage {
+        display: flex;
+        justify-content: space-between;
+        margin-top: .5rem;
+    }
 </style>

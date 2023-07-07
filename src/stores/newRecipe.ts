@@ -1,7 +1,8 @@
-import { ref, computed, shallowRef } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { Ingredient } from '@/types/Ingredient'
 import type { Recipe } from '@/types/Recipe'
+import { timestamp } from '@/firebase/config'
 
 export const useNewRecipeStore = defineStore('newRecipe', () => {
         
@@ -13,7 +14,9 @@ export const useNewRecipeStore = defineStore('newRecipe', () => {
         description: '',
         ingredients: [],
         steps: [],
-        favorite: false
+        favorite: false,
+        id: '',
+        createdAt: timestamp
     })
     
     const currentIngredient = ref<Ingredient>({
@@ -54,8 +57,29 @@ export const useNewRecipeStore = defineStore('newRecipe', () => {
             description: '',
             ingredients: [],
             steps: [],
-            favorite: false
+            favorite: false,
+            id: '',
+            filePath: '',
+            imageUrl: ''
         }
+
+        newRecipeImage.value = null
     }
-  return { newRecipe, currentIngredient, addIngredient, deleteIngredient, addStep, resetRecipe}
+    
+    const newRecipeImage = ref<Blob | null>()
+
+    const updateRecipeImage = (recipe: Blob) => {
+        newRecipeImage.value = recipe
+    }
+
+    return { 
+        newRecipe, 
+        newRecipeImage,
+        currentIngredient, 
+        addIngredient, 
+        deleteIngredient, 
+        addStep, 
+        resetRecipe,
+        updateRecipeImage
+    }
 })

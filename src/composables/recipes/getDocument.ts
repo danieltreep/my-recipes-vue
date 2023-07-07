@@ -26,6 +26,9 @@ const getDocument = async (id: string) => {
 
     if (response.exists()) {
         recipe.value = response.data()
+        // console.log(response.data())
+    } else {
+        console.log('diddnt fijsdf')
     }
     error.value = null
     // console.log(recipe.value)

@@ -38,7 +38,6 @@ const handleSubmit = () => {
     if (!newRecipe.value.ingredients.length) {
         error.value = true
     } else {
-        console.log('submitted step 2')
         increment()
     }
 

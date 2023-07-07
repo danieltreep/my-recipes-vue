@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src="@/assets/food.jpg" alt="">
+        <img :src="imageUrl" alt="">
         <div class="page">
             <header>
                 <span class="material-symbols-outlined" @click="router.go(-1)">keyboard_backspace</span>
@@ -17,7 +17,7 @@
                 <span class="material-symbols-outlined" @click="showOptions = !showOptions">more_vert</span>
                 <RecipeOptions v-if="showOptions" @delete="handleDelete"/>
             </header>
-            <SingleRecipe :recipe="selectedRecipe" v-if="selectedRecipe"/>
+            <SingleRecipe :recipe="recipe" v-if="recipe"/>
             <!-- Suspense -->
         </div>
     </div>
@@ -47,9 +47,21 @@ const props = defineProps<{
     id: string
 }>()
 
+// Store image url
+const imageUrl = ref('')
+
+// Store currentRecipe
+const recipe = ref(selectedRecipe)
+
 onMounted(async () => {
-    const {recipe} = await getDocument(props.id)
+    const { recipe } = await getDocument(props.id)
     updateRecipe(recipe.value)
+
+    if (selectedRecipe.value.imageUrl) {
+        imageUrl.value = selectedRecipe.value.imageUrl
+    } else if (!selectedRecipe.value.imageUrl) {
+        imageUrl.value = new URL(`/src/assets/categories/${recipe.value.category}.jpg`, import.meta.url).href
+    }
 })
 
 const router = useRouter()

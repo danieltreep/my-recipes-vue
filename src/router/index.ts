@@ -35,7 +35,7 @@ const router = createRouter({
       props: true
     },
     {
-      path: '/recipes/:id',
+      path: '/recipes/:category/:id',
       name: 'Recipe',
       component: () => import('../views/recipes/RecipePage.vue'),
       beforeEnter: requireAuth,

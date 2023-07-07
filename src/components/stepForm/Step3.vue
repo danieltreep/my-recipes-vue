@@ -26,30 +26,56 @@
 </template>
 
 <script setup lang="ts">
-import { useNewRecipeStore } from '@/stores/newRecipe';
+// External
 import { storeToRefs } from 'pinia';
 import { useStepStore } from '@/stores/step';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import useCollection from '@/composables/recipes/useCollection'
 
+// Composables
+import useCollection from '@/composables/recipes/useCollection'
+import useStorage from '@/composables/recipes/useStorage'
+
+// Stores
+import { useNewRecipeStore } from '@/stores/newRecipe';
+
+// Components
 import StepsListItem from './StepsListItem.vue';
 import AddSteps from './AddSteps.vue';
 
+// Functions
 const { addDocument } = useCollection('recipes')
-const { newRecipe } = storeToRefs(useNewRecipeStore())
 const { resetRecipe } = useNewRecipeStore()
 const { decrement, resetStep } = useStepStore()
-const router = useRouter()
+const { filePath, url, uploadImage } = useStorage()
 
+// Refs
+const { newRecipe, newRecipeImage } = storeToRefs(useNewRecipeStore())
 const error = ref(false)
 
+const router = useRouter()
+
 const handleSubmit = async () => {
+
+    // Show error if there are no errors
     if (!newRecipe.value.steps.length) {
         error.value = true
     } else {
+
+        // Check if there is an image in store, if so upload it.
+        if (newRecipeImage.value) {
+            await uploadImage(newRecipeImage.value)
+
+            // Update the new recipe with the returned filePath and url refs
+            newRecipe.value.filePath = filePath.value
+            newRecipe.value.imageUrl = url.value
+        }
+
+        // Add document with the value from newRecipe store
         const recipeId = await addDocument(newRecipe.value)
-        router.push({name: 'Recipe', params: {id: recipeId}})
+
+        // Reset steps and go to newly added recipe page
+        router.push({name: 'Recipe', params: {category: newRecipe.value.category, id: recipeId}})
         resetStep()
         resetRecipe()
     }
