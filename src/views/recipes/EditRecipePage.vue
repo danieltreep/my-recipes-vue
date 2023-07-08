@@ -307,10 +307,11 @@ const handleSubmit = async () => {
     ul.ingredients {
         background-color: var(--card-color);
         border-radius: var(--border-radius-m);
+        box-shadow: var(--box-shadow);
         padding-left: 0;
     }
     
-    /* li:not(:last-child) {
+    .ingredients li:not(:last-child) {
         border-bottom: 3px solid var(--background-color);
-    } */
+    }
 </style>

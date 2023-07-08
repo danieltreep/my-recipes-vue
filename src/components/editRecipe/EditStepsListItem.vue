@@ -1,5 +1,5 @@
 <template>
-    <li class="step">
+    <li class="step box">
         <div class="info">
             <p  class="number">{{ index + 1 }}.</p>
             <span v-if="showEdit && !edit" class="material-symbols-outlined" @click="edit = true">edit</span>
