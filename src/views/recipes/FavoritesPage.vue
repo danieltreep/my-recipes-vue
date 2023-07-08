@@ -44,7 +44,6 @@ onMounted(async () => {
         background-image: linear-gradient(#ffffff90, var(--background-color) 80px);
         backdrop-filter: blur(10px);
         transform: translateY(-100px);
-        text-align: center;
     }
     header {
         text-align: center;

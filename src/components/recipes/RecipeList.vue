@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import NoRecipesVue from '../NoRecipes.vue';
+import NoRecipesVue from '@/components/recipes/NoRecipes.vue';
 import RecipeThumbnail from './RecipeThumbnail.vue';
 
 defineProps<{

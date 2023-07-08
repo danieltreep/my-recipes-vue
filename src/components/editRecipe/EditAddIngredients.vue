@@ -32,12 +32,12 @@
 </template>
 
 <script setup lang="ts">
-import { useNewRecipeStore } from '@/stores/newRecipe';
+import { useSelectedRecipeStore } from '@/stores/currentRecipe';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 
-const { currentIngredient } = storeToRefs(useNewRecipeStore())
-const { addIngredient } = useNewRecipeStore()
+const { currentIngredient } = storeToRefs(useSelectedRecipeStore())
+const { addIngredient } = useSelectedRecipeStore()
 
 const error = ref(false)
 

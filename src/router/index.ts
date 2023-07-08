@@ -42,6 +42,12 @@ const router = createRouter({
       props: true
     },
     {
+      path: '/recipes/edit',
+      name: 'Edit',
+      component: () => import('../views/recipes/EditRecipePage.vue'),
+      beforeEnter: requireAuth
+    },
+    {
       path: '/login',
       name: 'Login',
       component: LoginPage
@@ -69,6 +75,7 @@ const router = createRouter({
       component: () => import('../views/AccountPage.vue'),
       beforeEnter: requireAuth
     },
+    
   ]
 })
 

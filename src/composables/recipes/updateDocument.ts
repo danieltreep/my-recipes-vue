@@ -7,24 +7,19 @@ import getUser from "../auth/getUser";
 
 const {user}: any = getUser()
 
-const useCollection = (col: string) => {
+const useUpdateDocument = (col: string) => {
     const error = ref(null)
     const isPending = ref<boolean>(true)
 
-    const addDocument = async (document: Recipe) => {
+    const updateDocument = async (document: Recipe) => {
         error.value = null
 
         try {
-            const response = await addDoc(collection(db, "users", user.value.uid, col), document)
-            
             // Immediately add document id 
-            await updateDoc(doc(db, "users", user.value.uid, col, response.id), {
-                ...document,
-                id: response.id
-            })
+            await updateDoc(doc(db, "users", user.value.uid, col, document.id), document)
 
             isPending.value = false
-            return response.id
+            
         } catch (err: any) {
             error.value = err.message
             console.log(err.message)
@@ -32,7 +27,7 @@ const useCollection = (col: string) => {
         }
     }
     
-    return { error, addDocument, isPending}
+    return { error, updateDocument, isPending}
 }
 
-export default useCollection
+export default useUpdateDocument

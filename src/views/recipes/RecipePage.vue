@@ -27,7 +27,7 @@
 import getDocument from '@/composables/recipes/getDocument';
 import setFavorite from '@/composables/recipes/setFavorite'
 import SingleRecipe from '@/components/recipes/SingleRecipe.vue';
-import RecipeOptions from '@/components/RecipeOptions.vue';
+import RecipeOptions from '@/components/recipes/RecipeOptions.vue';
 
 import { useSelectedRecipeStore } from '@/stores/currentRecipe';
 import { ref, onMounted } from 'vue';
