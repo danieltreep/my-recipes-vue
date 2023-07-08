@@ -11,7 +11,7 @@ const useUpdateDocument = (col: string) => {
     const error = ref(null)
     const isPending = ref<boolean>(true)
 
-    const updateDocument = async (document: Recipe) => {
+    const updateDocument = async (document: any) => {
         error.value = null
 
         try {

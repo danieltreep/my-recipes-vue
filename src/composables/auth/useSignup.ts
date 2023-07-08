@@ -1,5 +1,5 @@
 import { auth } from '@/firebase/config'
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
+import { type User, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { ref } from 'vue'
 
 const error = ref(null)
@@ -14,7 +14,6 @@ const signup = async (email: string, password: string, displayName: string) => {
         .then(userCredential => {
             error.value = null
             isPending.value = false
-    
             console.log(userCredential.user)
         })
         .catch(err => {
@@ -23,7 +22,7 @@ const signup = async (email: string, password: string, displayName: string) => {
         })
 
     // Update user profile
-    await updateProfile(auth.currentUser, {displayName})
+    await updateProfile(auth.currentUser as User, {displayName})
         .then(() => console.log('user updated!'))
         .catch(() => console.log('user could not be updated'))
 

@@ -10,9 +10,10 @@
 <script setup lang="ts">
 import NoRecipesVue from '@/components/recipes/NoRecipes.vue';
 import RecipeThumbnail from './RecipeThumbnail.vue';
+import type { Recipe } from '@/types/Recipe';
 
 defineProps<{
-    recipes: Object[]
+    recipes: Array<Recipe>
 }>()
 
 </script>

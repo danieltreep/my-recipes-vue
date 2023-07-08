@@ -1,7 +1,8 @@
-import { ref as vueRef} from 'vue'
+import { ref as vueRef, type Ref} from 'vue'
 import { storage } from '@/firebase/config'
 import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import getUser from '@/composables/auth/getUser'
+import type { User } from 'firebase/auth';
 
 const { user } = getUser()
 

@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, serverTimestamp } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { getAuth, type Auth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
@@ -20,7 +20,7 @@ const db = getFirestore(app)
 const timestamp = serverTimestamp();
 
 // Initialize authentication
-const auth = getAuth(app);
+const auth: Auth = getAuth(app);
 
 const storage = getStorage(app);
 
