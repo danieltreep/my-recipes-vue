@@ -23,7 +23,8 @@ const empty = ref(true)
 
 setTimeout(()=> {
     empty.value = false
-}, 500)
+}, 200)
+
 </script>
 
 <style lang="css" scoped>
