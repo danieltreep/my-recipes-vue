@@ -22,9 +22,15 @@
   --border-radius-m: 8px;
   --border-radius-l: 25px;
 }
+html {
+  background-color: black;
+}
 
-body {
+#app {
   background-color: var(--background-color);
+  max-width: 800px;
+  min-height: 100svh;
+  margin: 0 auto;
 }
 .page {
   padding: 1.5rem;

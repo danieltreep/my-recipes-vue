@@ -59,8 +59,9 @@ const handleSubmit = async () => {
         justify-content: space-around;
     }
     .container {
-        /* max-width: 280px; */
-        /* margin: 0 auto; */
+        /* max-width: 70%;
+        width: 100%;
+        margin: 0 auto; */
         text-align: center;
         padding: 3rem;
         color: var(--font-light);

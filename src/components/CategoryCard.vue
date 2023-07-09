@@ -18,8 +18,9 @@ const imageUrl = ref<string>(new URL(`/src/assets/vectors/${props.cat}.svg`, imp
 
 <style lang="css" scoped>
     .card {
-        height: 150px;
+        /* height: ; */
         width: 100%;
+        aspect-ratio: 2/2.5;
         background-color: var(--card-color);
         display: flex;
         flex-direction: column;
@@ -29,11 +30,14 @@ const imageUrl = ref<string>(new URL(`/src/assets/vectors/${props.cat}.svg`, imp
         gap: .5rem;
         box-shadow: var(--box-shadow);
         border-radius: var(--border-radius-m);
-        font-size: 13px;
+        /* font-size: 13px; */
+        /* flex-grow: 1;
+        flex-basis: 120px; */
     }
     .card p {
         color: var(--font-color);
         font-weight: 500;
+        word-wrap: break-word;
     }
     img {
         height: 100%;

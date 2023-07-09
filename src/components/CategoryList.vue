@@ -24,7 +24,20 @@ const categories = ref<Array<string>>([
 <style lang="css" scoped>
     .layout {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px 5px;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 10px;
+        /* max-width: 100%; */
+        margin-bottom: calc(85px + 1.5rem);
+    }
+
+    @media (min-width: 420px) {
+        .layout {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+    }
+    @media (min-width: 800px) {
+        .layout {
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
     }
 </style>
