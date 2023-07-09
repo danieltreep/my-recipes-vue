@@ -34,6 +34,7 @@ html {
 }
 .page {
   padding: 1.5rem;
+  /* min-height: 100svh; */
 }
 
 a {

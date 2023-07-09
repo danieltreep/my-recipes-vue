@@ -20,7 +20,9 @@
                     </div>
                 </div>
             </div>
-            <RecipeList :recipes="recipes" v-if="recipes"/>
+
+            <RecipeList :recipes="recipes" :empty="empty" v-if="recipes"/>
+            
         </div>
     </div>
 </template>
@@ -31,7 +33,8 @@ import getCollection from '@/composables/recipes/getCollection'
 import { useRouter } from 'vue-router';
 import { onMounted, ref } from 'vue';
 
-const recipes = ref<any>([])
+const recipes = ref<any>()
+const empty = ref(false)
 
 const props = defineProps<{
     category: string
@@ -41,7 +44,11 @@ const imageUrl = ref<string>(new URL(`/src/assets/categories/${props.category}.j
 
 onMounted(async () => {
     const { documents, error } = await getCollection('recipes', 'category', props.category)
+    if (!documents.value.length) {
+        empty.value = true
+    }
     recipes.value = documents.value
+    empty.value = false
 })
 
 const router = useRouter()

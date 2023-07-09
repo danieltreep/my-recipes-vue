@@ -30,9 +30,6 @@ const imageUrl = ref<string>(new URL(`/src/assets/vectors/${props.cat}.svg`, imp
         gap: .5rem;
         box-shadow: var(--box-shadow);
         border-radius: var(--border-radius-m);
-        /* font-size: 13px; */
-        /* flex-grow: 1;
-        flex-basis: 120px; */
     }
     .card p {
         color: var(--font-color);
