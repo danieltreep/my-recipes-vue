@@ -157,7 +157,6 @@ const handleChange = (event: any) => {
 
 const handleSubmit = async () => {
 
-    // console.log('submitted', selectedRecipe.value)
     // Show error if there are no errors
     if (!selectedRecipe.value.steps.length || !selectedRecipe.value.ingredients.length) {
         error.value = true

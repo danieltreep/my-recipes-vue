@@ -1,17 +1,6 @@
 <template>
     <div>
         <!-- Transition? -->
-        <!-- <StepButtons /> -->
-        <!-- <div class="buttons">
-            <button type="submit" :disabled="step === 1" @click.prevent="decrement" class="prev">
-                <span class="material-symbols-outlined">navigate_before</span>
-            Vorige</button>
-            <button v-if="step < 3" @click.prevent="increment" class="next">
-                Volgende
-                <span class="material-symbols-outlined">navigate_next</span>
-            </button>
-            <button type="submit" v-if="step === 3" class="save">Opslaan</button>
-        </div> -->
         <Step1 v-if="step === 1"/>
         <Step2 v-if="step === 2"/>
         <Step3 v-if="step === 3"/>

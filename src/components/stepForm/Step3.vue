@@ -18,7 +18,8 @@
                     <span class="material-symbols-outlined">navigate_before</span>
                     Vorige
                 </button>
-                <button type="submit" class="save">Opslaan</button>
+                <button v-if="isPending" disabled type="submit" class="save">Aan het opslaan...</button>
+                <button v-else type="submit" class="save">Opslaan</button>
             </div>
             <div class="error" v-if="error">
                 <p>Voeg een stap toe voordat u het recept opslaat</p>
@@ -45,7 +46,7 @@ import StepsListItem from './StepsListItem.vue';
 import AddSteps from './AddSteps.vue';
 
 // Functions
-const { addDocument } = useCollection('recipes')
+const { addDocument, isPending } = useCollection('recipes')
 const { resetRecipe } = useNewRecipeStore()
 const { decrement, resetStep } = useStepStore()
 const { filePath, url, uploadImage } = useStorage()

@@ -9,10 +9,11 @@ const {user}: any = getUser()
 
 const useCollection = (col: string) => {
     const error = ref(null)
-    const isPending = ref<boolean>(true)
+    const isPending = ref<boolean>(false)
 
     const addDocument = async (document: Recipe) => {
         error.value = null
+        isPending.value = true
 
         try {
             const response = await addDoc(collection(db, "users", user.value.uid, col), document)

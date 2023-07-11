@@ -3,7 +3,7 @@
         <img :src="imageUrl" alt="">
         <div class="page">
             <header>
-                <span class="material-symbols-outlined" @click="router.go(-1)">keyboard_backspace</span>
+                <span class="material-symbols-outlined" @click="router.go(-1)">arrow_back</span>
                 <div class="hero">
                     <span class="material-symbols-outlined">room_service</span>
                     <h1>{{ category.charAt(0).toUpperCase() }}{{ category.slice(1) }}</h1>
