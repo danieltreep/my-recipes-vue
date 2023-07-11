@@ -6,7 +6,7 @@
                 <span class="material-symbols-outlined">favorite</span>
                 <h1>Favorieten</h1>
             </header>
-            <div class="tagsSection">
+            <!-- <div class="tagsSection">
                 <div class="tagsHeader">
                     <p>Filter by tags</p>
                     <span class="material-symbols-outlined">filter_list</span>
@@ -16,8 +16,8 @@
                         <p>Zoet</p>
                     </div>
                 </div>
-            </div>
-            <RecipeList :recipes="recipes" v-if="recipes.length"/>
+            </div> -->
+            <RecipeList :recipes="favorites" v-if="favorites.length"/>
             <div v-else class="niks">
                 <p>Je hebt nog geen favorieten</p>
             </div>
@@ -27,15 +27,18 @@
 
 <script setup lang="ts">
 import RecipeList from '@/components/recipes/RecipeList.vue'
-import getCollection from '@/composables/recipes/getCollection'
-import { onMounted, ref } from 'vue';
+import { useRecipesStore } from '@/stores/recipes';
+import { storeToRefs } from 'pinia';
+import { onMounted } from 'vue'
 
-const recipes = ref<any>([])
+// const recipes = ref<any>([])
+const { favorites } = storeToRefs(useRecipesStore())
+const { fetchRecipes } = useRecipesStore()
 
 onMounted(async () => {
-    const { documents, error } = await getCollection('recipes', 'favorite', true)
-    recipes.value = documents.value
+    await fetchRecipes();
 })
+
 </script>
 
 <style lang="css" scoped>
@@ -47,7 +50,7 @@ onMounted(async () => {
     }
     header {
         text-align: center;
-        padding-top: 2rem;
+        padding: 2rem;
     }
     header span {
         color: var(--primary-color);

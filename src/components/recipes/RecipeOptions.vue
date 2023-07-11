@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 
-defineEmits(['delete', 'edit'])
+defineEmits(['delete'])
 
 const router = useRouter()
 

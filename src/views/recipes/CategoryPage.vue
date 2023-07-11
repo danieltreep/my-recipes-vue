@@ -9,7 +9,7 @@
                     <h1>{{ category.charAt(0).toUpperCase() }}{{ category.slice(1) }}</h1>
                 </div>
             </header>
-            <div class="tagsSection">
+            <!-- <div class="tagsSection">
                 <div class="tagsHeader">
                     <p>Filter by tags</p>
                     <span class="material-symbols-outlined">filter_list</span>
@@ -19,9 +19,9 @@
                         <p>Zoet</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <RecipeList :recipes="recipes" v-if="recipes"/>
+            <RecipeList :recipes="categoryRecipes(category)" v-if="categoryRecipes"/>
             
         </div>
     </div>
@@ -29,22 +29,17 @@
 
 <script setup lang="ts">
 import RecipeList from '@/components/recipes/RecipeList.vue'
-import getCollection from '@/composables/recipes/getCollection'
 import { useRouter } from 'vue-router';
-import { onMounted, ref } from 'vue';
-
-const recipes = ref<any>()
+import { ref } from 'vue';
+import { useRecipesStore } from '@/stores/recipes';
 
 const props = defineProps<{
     category: string
 }>()
 
-const imageUrl = ref<string>(new URL(`/src/assets/categories/${props.category}.jpg`, import.meta.url).href)
+const { categoryRecipes } = useRecipesStore()
 
-onMounted(async () => {
-    const { documents, error } = await getCollection('recipes', 'category', props.category)
-    recipes.value = documents.value
-})
+const imageUrl = ref<string>(new URL(`/src/assets/categories/${props.category}.jpg`, import.meta.url).href)
 
 const router = useRouter()
 
@@ -56,6 +51,9 @@ const router = useRouter()
         background-image: linear-gradient(#ffffff90, var(--background-color) 80px);
         backdrop-filter: blur(10px);
         transform: translateY(-100px);
+    }
+    header {
+        padding-bottom: 2rem;
     }
     .hero {
         text-align: center;

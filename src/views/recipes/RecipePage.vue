@@ -35,6 +35,7 @@ import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 
 import useDeleteDocument from '@/composables/recipes/deleteDocument'
+import { useRecipesStore } from '@/stores/recipes';
 
 const { selectedRecipe } = storeToRefs(useSelectedRecipeStore())
 
@@ -58,8 +59,10 @@ onMounted(async () => {
 })
 
 const router = useRouter()
+const { setFavoriteStore } = useRecipesStore()
 
 const handleFav = async () => {
+    setFavoriteStore(props.id, !selectedRecipe.value.favorite)
     selectedRecipe.value.favorite = !selectedRecipe.value.favorite
     await setFavorite(props.id, selectedRecipe.value.favorite)
 }
@@ -67,7 +70,7 @@ const handleFav = async () => {
 const handleDelete = async () => {
     console.log('deleted')
     await useDeleteDocument(selectedRecipe.value.id)
-    router.go(-1)
+    router.push({name: 'Recipes'})
 }
 
 </script>

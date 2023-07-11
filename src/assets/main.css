@@ -23,7 +23,7 @@
   --border-radius-l: 25px;
 }
 html {
-  background-color: black;
+  background-color: var(--background-color);
 }
 
 #app {

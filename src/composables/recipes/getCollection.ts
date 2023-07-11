@@ -2,6 +2,10 @@ import { ref } from "vue";
 import { db } from "@/firebase/config";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import getUser from "../auth/getUser";
+import { useRecipesStore } from "@/stores/recipes";
+import { storeToRefs } from "pinia";
+
+const { recipes } = storeToRefs(useRecipesStore())
 
 const {user}: any = getUser()
 
@@ -19,14 +23,11 @@ const getCollection = async (col: string, param: string, value: string | boolean
     })
 
     documents.value = results
+    recipes.value = results
     error.value = null
     // console.log(documents.value)
 
-    const getFavorites = () => {
-        
-    }
-
-    return { documents, error, getFavorites }
+    return { documents, error }
 }
 
 export default getCollection

@@ -30,5 +30,7 @@ setTimeout(()=> {
 <style lang="css" scoped>
     .recipeList {
         margin-top: 1rem;
+        border-top: 1px solid #D9D9D9;
+        padding-top: 1rem;
     }
 </style>

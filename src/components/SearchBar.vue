@@ -8,8 +8,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useSearchStore } from '@/stores/search';
+import { storeToRefs } from 'pinia';
 
-const searchTerm = ref<string>('')
+// const searchTerm = ref<string>('')
+const { searchTerm } = storeToRefs(useSearchStore())
 
 const handleClear = () => {
     searchTerm.value = ''
