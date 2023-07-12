@@ -1,5 +1,5 @@
 export interface Ingredient {
     name: String,
-    amount?: Number | null,
+    amount?: number | null,
     unit?: String
 }
