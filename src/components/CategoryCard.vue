@@ -30,6 +30,7 @@ const imageUrl = ref<string>(new URL(`/src/assets/vectors/${props.cat}.svg`, imp
         gap: .5rem;
         box-shadow: var(--box-shadow);
         border-radius: var(--border-radius-m);
+        transition: .1s;
     }
     .card p {
         color: var(--font-color);
@@ -41,5 +42,9 @@ const imageUrl = ref<string>(new URL(`/src/assets/vectors/${props.cat}.svg`, imp
     }
     img:last-of-type {
         height: 80%;
+    }
+    .card:active {
+        transform: translateY(5px);
+        box-shadow: none;
     }
 </style>
