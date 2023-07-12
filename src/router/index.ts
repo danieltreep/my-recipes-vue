@@ -19,6 +19,10 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      redirect: '/recipes'
+    },
+    {
+      path: '/recipes',
       name: 'Recipes',
       component: RecipesPage,
       beforeEnter: requireAuth
