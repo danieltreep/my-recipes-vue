@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src="@/assets/food.jpg" alt="">
+        <img src="@/assets/favorites.jpg" alt="">
         <div class="page">
             <header>
                 <span class="material-symbols-outlined">favorite</span>

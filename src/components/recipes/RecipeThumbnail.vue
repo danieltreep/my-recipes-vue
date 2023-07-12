@@ -45,8 +45,7 @@ onMounted(() => {
         overflow: hidden;
         display: grid;
         grid-template-columns: 1.5fr 3fr;
-        max-height: 110px;
-        min-height: 100px;
+        height: 110px;
         margin-bottom: 1rem;
     }
     .text {
@@ -71,7 +70,7 @@ onMounted(() => {
         color: var(--font-color);
     }
     .description {
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 1;
         /* autoprefixer: off */
         -webkit-box-orient: vertical;
         /* autoprefixer: on */
