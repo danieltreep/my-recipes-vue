@@ -38,12 +38,12 @@ const route = useRoute()
 <style lang="css" scoped>
     nav {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         background-color: white;
         width: 100%;
         position: fixed;
         bottom: 0;
-        padding: 0 1.5rem ;
+        /* padding: 0 1.5rem ; */
         box-shadow: 0 -4px 4px 0 #00000015;
         font-family: 'Roboto Condensed', sans-serif;
         font-weight: bold;

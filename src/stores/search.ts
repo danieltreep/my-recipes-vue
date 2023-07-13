@@ -5,11 +5,6 @@ import { useRecipesStore } from './recipes'
 export const useSearchStore = defineStore('search', () => {
     const { recipes } = storeToRefs(useRecipesStore())
     const searchTerm = ref('')
-
-    const updateSearchTerm = (e: string) => {
-        console.log(e)
-        // searchTerm.value = e.target
-    }
   
     const recipeList = computed(() => {
         return recipes.value.filter(recipe => {
@@ -17,5 +12,5 @@ export const useSearchStore = defineStore('search', () => {
         })
     })
 
-    return { searchTerm, recipeList, updateSearchTerm }
+    return { searchTerm, recipeList }
 })
