@@ -1,9 +1,9 @@
 <template>
-    <form class="search">
+    <div class="search">
         <span class="material-symbols-outlined">search</span>
         <input type="text" v-model="searchTerm" @keyup="updateSearchTerm(searchTerm)" placeholder="Zoek een recept">
         <span class="material-symbols-outlined" v-if="searchTerm" @click="handleClear">cancel</span>
-    </form>
+    </div>
 </template>
 
 <script setup lang="ts">
