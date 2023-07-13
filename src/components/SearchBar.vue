@@ -1,7 +1,7 @@
 <template>
     <form class="search">
         <span class="material-symbols-outlined">search</span>
-        <input type="text" v-model="searchTerm" placeholder="Zoek een recept">
+        <input type="text" v-model="searchTerm" @keyup="updateSearchTerm(searchTerm)" placeholder="Zoek een recept">
         <span class="material-symbols-outlined" v-if="searchTerm" @click="handleClear">cancel</span>
     </form>
 </template>
@@ -13,6 +13,8 @@ import { storeToRefs } from 'pinia';
 
 // const searchTerm = ref<string>('')
 const { searchTerm } = storeToRefs(useSearchStore())
+
+const { updateSearchTerm } = useSearchStore()
 
 const handleClear = () => {
     searchTerm.value = ''
