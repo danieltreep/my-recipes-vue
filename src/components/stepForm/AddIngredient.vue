@@ -87,5 +87,8 @@ const handleAddIngredient = () => {
     }
     .add {
         border: 1px solid var(--secondary-color);
+        display: flex;
+        justify-content: center;
+        font-weight: bold;
     }
 </style>

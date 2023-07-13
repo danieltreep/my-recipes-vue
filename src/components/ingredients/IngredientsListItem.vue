@@ -1,8 +1,8 @@
 <template>
     <li class="inputGroup" :class="checked ? 'checked' : ''">
         <div class="ingredient">
-            <span v-if="edit" class="material-symbols-outlined" @click.prevent="handleDelete(index)">delete</span>
-            <span v-if="!edit" class="material-symbols-outlined" @click.prevent="handleCheck">{{checked ? 'check_box' : 'check_box_outline_blank'}}</span>
+            <span tabindex="0" aria-label="delete ingredient" v-if="edit" class="material-symbols-outlined" @click.prevent="handleDelete(index)" @keydown.enter="handleDelete(index)">delete</span>
+            <span v-if="!edit" class="material-symbols-outlined checkmark" @click.prevent="handleCheck">{{checked ? 'check_box' : 'check_box_outline_blank'}}</span>
             <p>{{ ingredient.name.charAt(0).toUpperCase() }}{{ ingredient.name?.slice(1) }}</p>    
         </div>
         <div class="hoeveelheid">
@@ -57,5 +57,8 @@ const handleCheck = () => {
     }
     .ingredient .material-symbols-outlined {
         font-size: 16px;
+    }
+    .checkmark {
+        cursor: pointer;
     }
 </style>

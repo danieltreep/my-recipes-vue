@@ -29,9 +29,9 @@
                 <span class="material-symbols-outlined">person</span>
                 <p>Aantal personen</p>
                 <div class="counter">
-                    <span @click="handleDecrement">-</span>
+                    <span tabindex="0" @click="handleDecrement">-</span>
                     <p>{{ selectedRecipe.people }}</p>
-                    <span @click="handleIncrement">+</span>
+                    <span tabindex="0" @click="handleIncrement">+</span>
                 </div>
             </div>
             <div>
@@ -152,6 +152,7 @@ const handleIncrement = () => {
         display: flex;
         justify-content: space-around;
         color: var(--font-inactive);
+        cursor: pointer;
     }
     ul {
         margin-top: 1rem;

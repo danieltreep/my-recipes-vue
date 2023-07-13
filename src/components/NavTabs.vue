@@ -47,7 +47,7 @@ const route = useRoute()
         box-shadow: 0 -4px 4px 0 #00000015;
         font-family: 'Roboto Condensed', sans-serif;
         font-weight: bold;
-        max-width: 800px;
+        max-width: 450px;
     }
     nav a {
         text-align: center;

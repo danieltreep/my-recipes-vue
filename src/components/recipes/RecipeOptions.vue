@@ -1,10 +1,10 @@
 <template>
     <div class="options">
-        <div @click="$emit('delete')" class="option">
+        <div @click="$emit('delete')" @keydown.enter="$emit('delete')" class="option" tabindex="0">
             <span class="material-symbols-outlined">delete</span>
             <p>Delete recipe</p>
         </div>
-        <div class="option" @click="handleEdit">
+        <div class="option" @click="handleEdit" @keydown.enter="handleEdit" tabindex="0">
             <span class="material-symbols-outlined">edit</span>
             <p>Edit recipe</p>
         </div>
@@ -28,7 +28,7 @@ const handleEdit = () => {
     .options {
         position: absolute;
         background-color: var(--card-color);
-        padding: .5rem;
+        /* padding: .5rem; */
         right: 1rem;
         top: 4rem;
         border-radius: var(--border-radius-m);
@@ -40,9 +40,13 @@ const handleEdit = () => {
     .option {
         display: flex;
         gap: .5rem;
+        cursor: pointer;
+        padding: .5rem;
+    }
+    .option:hover {
+        background-color: bisque;
     }
     .option:not(:first-of-type) {
-        margin-top: .5rem;
         border-top: 1px solid var(--background-color);
         padding-top: .5rem;
     }

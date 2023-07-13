@@ -58,7 +58,7 @@
             </div>
             <div class="addImage">
                 
-                <label for="fileInput" class="fileLabel">
+                <label for="fileInput" class="fileLabel" tabindex="0">
                     <span class="material-symbols-outlined">add_photo_alternate</span>
                     
                     <p>Voeg een afbeelding toe</p>

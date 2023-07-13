@@ -3,18 +3,33 @@
         <img :src="imageUrl" alt="">
         <div class="page">
             <header>
-                <span class="material-symbols-outlined" @click="router.go(-1)">keyboard_backspace</span>
                 <span 
+                    tabindex="0" 
+                    aria-label="Go back to category"
+                    class="material-symbols-outlined" 
+                    @click="router.go(-1)"  
+                    @keydown.enter="router.go(-1)"
+                >arrow_back</span>
+                <span 
+                tabindex="0"
                     class="material-symbols-outlined fav" 
                     @click="handleFav"
+                    @keydown.enter="handleFav"
                     v-if="!selectedRecipe.favorite"
                 >favorite_border</span>
                 <span 
+                    tabindex="0"
                     class="material-icons fav" 
                     @click="handleFav"
+                    @keydown.enter="handleFav"
                     v-if="selectedRecipe.favorite" 
                 >favorite</span>
-                <span class="material-symbols-outlined" @click="showOptions = !showOptions">more_vert</span>
+                <span 
+                    class="material-symbols-outlined" 
+                    tabindex="0" 
+                    @click="showOptions = !showOptions"
+                    @keydown.enter="showOptions = !showOptions"
+                >more_vert</span>
                 <RecipeOptions v-if="showOptions" @delete="handleDelete"/>
             </header>
             <SingleRecipe :recipe="selectedRecipe" v-if="selectedRecipe"/>
@@ -92,6 +107,10 @@ const handleDelete = async () => {
     }
     header {
         display: flex;
+    }
+    span {
+        cursor: pointer;
+
     }
     .fav {
         margin: 0 1rem 0 auto;
