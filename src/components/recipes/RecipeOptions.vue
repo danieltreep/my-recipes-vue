@@ -2,11 +2,11 @@
     <div class="options">
         <div @click="$emit('delete')" @keydown.enter="$emit('delete')" class="option" tabindex="0">
             <span class="material-symbols-outlined">delete</span>
-            <p>Delete recipe</p>
+            <p>Verwijderen</p>
         </div>
         <div class="option" @click="handleEdit" @keydown.enter="handleEdit" tabindex="0">
             <span class="material-symbols-outlined">edit</span>
-            <p>Edit recipe</p>
+            <p>Aanpassen</p>
         </div>
     </div>
 </template>

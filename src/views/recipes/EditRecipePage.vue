@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="handleSubmit" class="page">
 
-        <h3>Edit recipe</h3>
+        <h3>Recept aanpassen</h3>
         <fieldset>
             <legend>Informatie</legend>
             <div class="inputGroup">
@@ -312,5 +312,10 @@ const handleSubmit = async () => {
     
     .ingredients li:not(:last-child) {
         border-bottom: 3px solid var(--background-color);
+    }
+    form {
+        margin: 0;
+        padding-top: 3rem;
+        padding-bottom: calc(85px + 3rem);
     }
 </style>

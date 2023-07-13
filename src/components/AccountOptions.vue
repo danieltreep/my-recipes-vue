@@ -1,7 +1,7 @@
 <template>
-    <div class="options" @click="$emit('delete')">
+    <div class="options" @click.stop="$emit('delete')">
         <span class="material-symbols-outlined">delete</span>
-        <p>Delete account</p>
+        <p>Verwijder account</p>
     </div>
 </template>
 

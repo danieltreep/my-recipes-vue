@@ -1,9 +1,9 @@
 <template>
-    <div class="page">
+    <div class="page" @click.capture="moreOptions = false">
         <header>
             <h3>Mijn Account</h3>
             <span class="material-symbols-outlined" @click="moreOptions = !moreOptions">more_vert</span>
-            <AccountOptions v-if="moreOptions" @delete="openModal"/>
+            <AccountOptions @click="openModal" v-if="moreOptions" />
         </header>
         <div class="profile">
             <span class="material-symbols-outlined">account_circle</span>
